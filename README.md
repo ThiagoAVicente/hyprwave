@@ -16,6 +16,9 @@ Check out the subreddit for posting your rices, themes, favorite albums -> https
 
 <img width="289" height="301" alt="image" src="https://github.com/user-attachments/assets/53a82a39-b073-4b05-8aaf-bdc3698a0fe9" />
 
+<img width="240" height="314" alt="image" src="https://github.com/user-attachments/assets/7085b6b7-35d6-4cb7-8256-875929546b42" />
+
+
 
 Style hyprwave to your taste via the style.css!
 
