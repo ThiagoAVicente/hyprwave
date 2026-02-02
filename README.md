@@ -10,7 +10,7 @@ Check out the subreddit for posting your rices, themes, favorite albums -> https
 
 # Your Control Bar, Your Imagination
 
-<img width="518" height="240" alt="image" src="https://github.com/user-attachments/assets/d79afb29-844d-4bae-b899-28aea6646139" /> <br>
+<img width="870" height="282" alt="verticle-control-bar" src="https://github.com/user-attachments/assets/04b4c73d-0cee-4fea-a596-8b80942bdbf1" /><br>
 
 
 
