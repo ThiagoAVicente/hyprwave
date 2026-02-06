@@ -788,6 +788,108 @@ For my GOAT Don Toliver, a special theme for his upcoming album, OCTANE.
 }
 ```
 
+## Prismarine Wave
+
+<img width="719" height="474" alt="2026-02-06 19-44-05" src="https://github.com/user-attachments/assets/fc3add80-49cc-459c-a977-c2158d0668a0" />
+
+```css
+/* ========================================
+   HyprWave - Prismarine Wave Theme
+   Inspired by turquoise ocean waves
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Ocean */
+    --bg-primary: rgba(10, 25, 30, 0.75);
+    --bg-secondary: rgba(15, 35, 40, 0.75);
+    --bg-album-cover: rgba(20, 40, 48, 0.85);
+    --bg-album-secondary: rgba(25, 48, 55, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Sea Foam */
+    --btn-default: rgba(120, 180, 190, 0.85);
+    --btn-default-secondary: rgba(110, 170, 180, 0.85);
+    --btn-default-hover: rgba(140, 200, 210, 0.92);
+    --btn-default-hover-secondary: rgba(130, 190, 200, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Turquoise */
+    --btn-play: rgba(60, 220, 240, 0.95);
+    --btn-play-secondary: rgba(50, 200, 220, 0.95);
+    --btn-play-hover: rgba(80, 240, 255, 0.98);
+    --btn-play-hover-secondary: rgba(70, 230, 245, 0.98);
+    --btn-play-active: rgba(40, 190, 210, 0.95);
+    --btn-play-active-secondary: rgba(30, 170, 190, 0.95);
+    
+    /* Button Colors - Expand - Deep Teal */
+    --btn-expand: rgba(40, 160, 180, 0.95);
+    --btn-expand-secondary: rgba(35, 145, 165, 0.95);
+    --btn-expand-hover: rgba(60, 180, 200, 0.98);
+    --btn-expand-hover-secondary: rgba(50, 170, 190, 0.98);
+    --btn-expand-active: rgba(30, 140, 160, 0.95);
+    --btn-expand-active-secondary: rgba(25, 125, 145, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(30, 60, 70, 0.25);
+    --progress-fill-start: rgba(60, 220, 240, 0.95);
+    --progress-fill-end: rgba(40, 160, 180, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(60, 220, 240, 0.98);
+    --handle-hover: rgba(80, 240, 255, 1.0);
+    --handle-border: rgba(40, 190, 210, 0.5);
+    --handle-shadow: rgba(60, 220, 240, 0.6);
+    
+    /* Text Colors - Bright aqua on dark */
+    --text-primary: rgba(220, 250, 255, 0.95);
+    --text-secondary: rgba(180, 230, 240, 0.85);
+    --text-tertiary: rgba(140, 200, 215, 0.75);
+    --text-muted: rgba(100, 160, 175, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(60, 120, 135, 0.35);
+    --border-button: rgba(80, 140, 155, 0.3);
+    --border-button-hover: rgba(100, 160, 175, 0.45);
+    --border-play: rgba(60, 220, 240, 0.4);
+    --border-play-hover: rgba(80, 240, 255, 0.55);
+    --border-expand: rgba(40, 160, 180, 0.4);
+    --border-expand-hover: rgba(60, 180, 200, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.5);
+    --shadow-button: rgba(0, 0, 0, 0.4);
+    --shadow-play: rgba(60, 220, 240, 0.5);
+    --shadow-play-hover: rgba(80, 240, 255, 0.7);
+    --shadow-expand: rgba(40, 160, 180, 0.5);
+    --shadow-expand-hover: rgba(60, 180, 200, 0.7);
+    --shadow-focus: rgba(60, 220, 240, 0.7);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - bright turquoise wave gradient */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(80, 240, 255, 0.98),
+        rgba(40, 180, 200, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 15px rgba(60, 220, 240, 0.8),
+                0 0 8px rgba(80, 240, 255, 0.6);
+}
+```
+
+
+
 For people feeling like making their own themes and wanting to share it to the world, make sure to follow the above formatting of themes, and I will make sure to merge them!
 
 # Community Themes
