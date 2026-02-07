@@ -888,6 +888,108 @@ For my GOAT Don Toliver, a special theme for his upcoming album, OCTANE.
 }
 ```
 
+## Purple Sunset
+
+<img width="868" height="487" alt="image" src="https://github.com/user-attachments/assets/05213cef-29ca-41fc-ac6c-17c38da97ec5" />
+
+```css
+/* ========================================
+   HyprWave - Purple Sunset Theme
+   Inspired by purple/pink portal with blue depths
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Void */
+    --bg-primary: rgba(15, 12, 30, 0.75);
+    --bg-secondary: rgba(20, 18, 40, 0.75);
+    --bg-album-cover: rgba(25, 22, 48, 0.85);
+    --bg-album-secondary: rgba(30, 28, 55, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Mystic Purple */
+    --btn-default: rgba(140, 100, 180, 0.85);
+    --btn-default-secondary: rgba(130, 90, 170, 0.85);
+    --btn-default-hover: rgba(160, 120, 200, 0.92);
+    --btn-default-hover-secondary: rgba(150, 110, 190, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Pink Portal */
+    --btn-play: rgba(255, 100, 200, 0.95);
+    --btn-play-secondary: rgba(240, 80, 180, 0.95);
+    --btn-play-hover: rgba(255, 120, 215, 0.98);
+    --btn-play-hover-secondary: rgba(255, 110, 205, 0.98);
+    --btn-play-active: rgba(230, 70, 170, 0.95);
+    --btn-play-active-secondary: rgba(220, 60, 160, 0.95);
+    
+    /* Button Colors - Expand - Deep Violet */
+    --btn-expand: rgba(120, 60, 200, 0.95);
+    --btn-expand-secondary: rgba(110, 50, 190, 0.95);
+    --btn-expand-hover: rgba(140, 80, 220, 0.98);
+    --btn-expand-hover-secondary: rgba(130, 70, 210, 0.98);
+    --btn-expand-active: rgba(100, 40, 180, 0.95);
+    --btn-expand-active-secondary: rgba(90, 35, 170, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(40, 30, 60, 0.25);
+    --progress-fill-start: rgba(255, 100, 200, 0.95);
+    --progress-fill-end: rgba(120, 60, 200, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 100, 200, 0.98);
+    --handle-hover: rgba(255, 120, 215, 1.0);
+    --handle-border: rgba(230, 70, 170, 0.5);
+    --handle-shadow: rgba(255, 100, 200, 0.6);
+    
+    /* Text Colors - Soft pink/purple on dark */
+    --text-primary: rgba(255, 220, 245, 0.95);
+    --text-secondary: rgba(230, 190, 220, 0.85);
+    --text-tertiary: rgba(200, 160, 195, 0.75);
+    --text-muted: rgba(160, 120, 165, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(100, 70, 140, 0.35);
+    --border-button: rgba(120, 85, 160, 0.3);
+    --border-button-hover: rgba(140, 100, 180, 0.45);
+    --border-play: rgba(255, 100, 200, 0.4);
+    --border-play-hover: rgba(255, 120, 215, 0.55);
+    --border-expand: rgba(120, 60, 200, 0.4);
+    --border-expand-hover: rgba(140, 80, 220, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(255, 100, 200, 0.5);
+    --shadow-play-hover: rgba(255, 120, 215, 0.7);
+    --shadow-expand: rgba(120, 60, 200, 0.5);
+    --shadow-expand-hover: rgba(140, 80, 220, 0.7);
+    --shadow-focus: rgba(255, 100, 200, 0.7);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - mystic portal glow */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 120, 215, 0.98),
+        rgba(180, 100, 220, 0.98),
+        rgba(140, 80, 220, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 16px rgba(255, 100, 200, 0.8),
+                0 0 10px rgba(140, 80, 220, 0.6);
+}
+```
+
+
 
 
 For people feeling like making their own themes and wanting to share it to the world, make sure to follow the above formatting of themes, and I will make sure to merge them!
