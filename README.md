@@ -1,8 +1,9 @@
-# hyprwave - v0.9 (latest release)
+# hyprwave - v0.9.1 (latest release)
 
 A sleek, modern music control bar for Wayland compositors (Hyprland, Niri, Sway, etc.) with MPRIS integration.
 
-Updates till now: Multi-Anchor support, Notifications, Music Controls, CSS Styling (control bar, expanded section and notifications), launching it as an application, huge UI bug fixing, ability to seek to different song parts via click or drag and click, volume controls, audio visualizer with idle mode animation (for horizontal mode), 8-bit dot matrix info bar with idle mode animation (for vertical layouts). All visual bugs fixed.
+Updates till now: Multi-Anchor support, Notifications, Music Controls, CSS Styling (control bar, expanded section and notifications), launching it as an application, huge UI bug fixing, ability to seek to different song parts via click or drag and click, volume controls, audio visualizer with idle mode animation (for horizontal mode), 8-bit dot matrix info bar with idle mode animation (for vertical layouts).
+Dynamic Island Inspired Animation added between visualizer and control bar transformations. All visual bugs fixed.
 
 Built and primarily tested on Niri, for all Wayland compositors that support GTK4 and GTK4-layer-shell.
 
@@ -98,7 +99,8 @@ https://github.com/user-attachments/assets/c4e84d3c-c93f-4bfe-b5e9-f7888b3b8b53
 - **Now Playing Notifications** - Elegant slide-in notifications for track changes
 - **Configurable Layout** - Position on any screen edge (left, right, top, bottom)
 - **Keybind Support** - Hide/show and expand with keyboard shortcuts
-- **Minimal Resource Usage** - ~80-95MB RAM, <0.3% CPU
+- **Minimal Resource Usage** - ~80-95MB RAM, <0.3% CPU, on idle mode, drops to 20-30MB RAM.
+- **Dynamic Island inspired animation** - Control bar morphs into idle mode bars via smooth animations
 
 ### Audio Visualizer
 
