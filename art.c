@@ -51,8 +51,8 @@ GtkWidget* load_album_art_to_container(const gchar *art_url, GtkWidget *containe
 
     if (!pixbuf) return NULL;
 
-    GdkTexture *texture = gdk_texture_new_for_pixbuf(pixbuf);
-    GtkWidget *image = gtk_picture_new_for_paintable(GDK_PAINTABLE(texture));
+    // Create image widget - let GTK4 handle texture creation/cleanup
+    GtkWidget *image = gtk_picture_new_for_pixbuf(pixbuf);
     gtk_widget_set_size_request(image, size, size);
 
     // For larger sizes (main widget), add extra layout controls
@@ -72,11 +72,9 @@ GtkWidget* load_album_art_to_container(const gchar *art_url, GtkWidget *containe
     clear_album_art_container(container);
     gtk_box_append(GTK_BOX(container), image);
 
-    g_object_unref(texture);
-    g_object_unref(pixbuf);
+    g_object_unref(pixbuf);  // GTK4 owns the texture now
 
     return image;
 }
 
 #pragma GCC diagnostic pop
-
