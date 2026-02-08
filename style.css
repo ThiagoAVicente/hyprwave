@@ -93,6 +93,15 @@
                 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: black; /* Match visualizer bar color */
+    letter-spacing: 0px;
+    line-height: 1.2;
+}
+
 /* ========================================
    Base Styles
    ======================================== */
@@ -521,18 +530,6 @@ button:focus {
 }
 
 
-.visualizer-bar {
-    /* Simple two-color gradient - black theme */
-    background: linear-gradient(180deg, 
-        rgba(46, 44, 38, 0.95),   /* Primary: Steel blue */
-        rgba(38, 37, 33, 0.95));  /* Secondary: Lighter steel blue */
-    border-radius: 0px;
-    transition: all 0.05s ease-out;
-    /* Keep bars visible */
-    margin: 0px;
-    min-width: 1px;
-    min-height: 3px;
-}
 /* Smooth control bar height transitions for idle mode */
 .control-container-horizontal {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -555,11 +552,3 @@ overlay {
     padding: 8px 4px;
 }
 
-.vertical-display-label {
-    font-family: 'VT323', monospace;
-    font-size: 28px;
-    font-weight: bold;
-    color: black; /* Match visualizer bar color */
-    letter-spacing: 0px;
-    line-height: 1.2;
-}
