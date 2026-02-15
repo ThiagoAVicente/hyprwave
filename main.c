@@ -451,6 +451,41 @@ static void handle_sigusr2(int sig) {
 }
 
 
+// Media control signal handlers (for gaming/keyboard-only use)
+static void handle_play_pause(int sig) {
+    if (!global_state || !global_state->mpris_proxy) return;
+    g_print("⏯️  Play/Pause toggled via keybind\n");
+    g_dbus_proxy_call(global_state->mpris_proxy, "PlayPause", NULL,
+                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
+}
+
+static void handle_next_track(int sig) {
+    if (!global_state || !global_state->mpris_proxy) return;
+    g_print("⏭️  Next track via keybind\n");
+    
+    // Notify vertical display about skip
+    if (global_state->vertical_display) {
+        vertical_display_notify_skip(global_state->vertical_display);
+    }
+    
+    g_dbus_proxy_call(global_state->mpris_proxy, "Next", NULL,
+                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
+}
+
+static void handle_prev_track(int sig) {
+    if (!global_state || !global_state->mpris_proxy) return;
+    g_print("⏮️  Previous track via keybind\n");
+    
+    // Notify vertical display about skip
+    if (global_state->vertical_display) {
+        vertical_display_notify_skip(global_state->vertical_display);
+    }
+    
+    g_dbus_proxy_call(global_state->mpris_proxy, "Previous", NULL,
+                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
+}
+
+
 
 
 
@@ -1992,6 +2027,14 @@ if (state->layout->is_vertical) {
     global_state = state;
     signal(SIGUSR1, handle_sigusr1);
     signal(SIGUSR2, handle_sigusr2);
+    
+    // Media control signals for keyboard-only/gaming use
+    signal(SIGRTMIN, handle_play_pause);      // Play/Pause
+    signal(SIGRTMIN+1, handle_next_track);    // Next
+    signal(SIGRTMIN+2, handle_prev_track);    // Previous
+    
+    g_print("🎮 Media control keybinds enabled:\n");
+    g_print("   Play/Pause, Next, Previous can be controlled via keybinds\n");
 
     // Setup D-Bus name watcher to monitor player appearance/disappearance
     GDBusConnection *bus = g_bus_get_sync(G_BUS_TYPE_SESSION, NULL, NULL);
