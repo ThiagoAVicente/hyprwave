@@ -4,7 +4,7 @@
 ACTION="$1"
 
 if [ -z "$ACTION" ]; then
-    echo "Usage: hyprwave-toggle {visibility|expand}"
+    echo "Usage: hyprwave-toggle {visibility|expand|play|next|prev}"
     exit 1
 fi
 
@@ -20,9 +20,18 @@ case "$ACTION" in
     expand)
         pkill -SIGUSR2 hyprwave
         ;;
+    play)
+        pkill -SIGRTMIN hyprwave
+        ;;
+    next)
+        pkill -SIGRTMIN+1 hyprwave
+        ;;
+    prev)
+        pkill -SIGRTMIN+2 hyprwave
+        ;;
     *)
         echo "Invalid action: $ACTION"
-        echo "Usage: hyprwave-toggle {visibility|expand}"
+        echo "Usage: hyprwave-toggle {visibility|expand|play|next|prev}"
         exit 1
         ;;
 esac
