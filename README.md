@@ -1,9 +1,9 @@
-# hyprwave - v0.9.1 (latest release)
+# hyprwave - v0.9.2 (latest release)
 
 A sleek, modern music control bar for Wayland compositors (Hyprland, Niri, Sway, etc.) with MPRIS integration.
 
 Updates till now: Multi-Anchor support, Notifications, Music Controls, CSS Styling (control bar, expanded section and notifications), launching it as an application, huge UI bug fixing, ability to seek to different song parts via click or drag and click, volume controls, audio visualizer with idle mode animation (for horizontal mode), 8-bit dot matrix info bar with idle mode animation (for vertical layouts).
-Dynamic Island Inspired Animation added between visualizer and control bar transformations. All visual bugs fixed.
+Dynamic Island Inspired Animation added between visualizer and control bar transformations. All visual bugs fixed. Direct media control keybinds for keyboard-only/gaming use.
 
 Built and primarily tested on Niri, for all Wayland compositors that support GTK4 and GTK4-layer-shell.
 
@@ -92,13 +92,15 @@ https://github.com/user-attachments/assets/c4e84d3c-c93f-4bfe-b5e9-f7888b3b8b53
 - **Album Art Display** - Fetches and displays album artwork
 - **Live Progress Tracking** - Real-time progress bar with countdown timer
 - **Full Playback Controls** - Play/Pause, Next, Previous buttons
+- **Media Control Keybinds** - Direct keyboard shortcuts for play/pause, next, previous (NEW in v0.9.2)
 - **Expandable Panel** - Toggle to reveal detailed track information
 - **Volume Control** - Double-click album cover to show/hide volume slider
 - **Audio Visualizer** - Real-time audio visualization with idle mode animation
 - **Idle Mode** - Automatically morphs into visualizer after inactivity
 - **Now Playing Notifications** - Elegant slide-in notifications for track changes
 - **Configurable Layout** - Position on any screen edge (left, right, top, bottom)
-- **Keybind Support** - Hide/show and expand with keyboard shortcuts
+- **Keybind Support** - Hide/show, expand, and media controls with keyboard shortcuts
+- **Gaming Support** - Control music during gameplay without moving mouse (NEW in v0.9.2)
 - **Minimal Resource Usage** - ~80-95MB RAM, <0.3% CPU, on idle mode, drops to 20-30MB RAM.
 - **Dynamic Island inspired animation** - Control bar morphs into idle mode bars via smooth animations
 
@@ -115,6 +117,15 @@ Features:
 
 ### Dot Matrix Display 
 Ever felt nostalgic about old mp3 players? Revive it back with vertical mode, with a minimalistic idle mode, scrolling name of song and artist name, PAUSE animations and PLAY animations. Mouse hover restores it back to the control bar. Also, if you don't want the dot matrix font, you are free to replace it with any other font, just place it in the same place as the VT323 font where it is placed after install, and fix the size of font in style.css if needed. 
+
+### Media Control Keybinds (NEW in v0.9.2)
+
+Control your music without touching the mouse! Perfect for:
+- **Gaming** - Skip tracks during gameplay without interrupting
+- **Keyboard-only workflows** - No need to move your hand to the mouse
+- **Quick access** - Instant play/pause, next, previous from any app
+
+Simply bind the new media control commands to your preferred keys and control music from anywhere!
 
 ### Collapsed State
 
@@ -198,7 +209,7 @@ The installer will:
 
 1. **Install and run HyprWave**: `hyprwave`
 2. **Start a music player** (Spotify, VLC, etc.)
-3. **Control your music** with the on-screen controls
+3. **Control your music** with the on-screen controls or keybinds
 4. **Use keybinds** for quick access (see configuration below)
 
 ### Supported Music Players
@@ -263,8 +274,8 @@ preference = spotify,vlc
 - **`idle_timeout = 5`** - Seconds of inactivity before visualizer appears (0 to disable)
 
 **Dot Matrix Display Options:**
-- **`enabled = true`** - Enable audio visualizer (horizontal layouts only)
-- **`idle_timeout = 5`** - Seconds of inactivity before visualizer appears (0 to disable)
+- **`enabled = true`** - Enable audio visualizer (vertical layouts only)
+- **`idle_timeout = 5`** - Seconds of inactivity before display appears (0 to disable)
 
 **Music Player:**
 Still being developed, however, if you are a spotify user, don't worry about it. Your experience will be smooth all around.
@@ -275,16 +286,21 @@ https://github.com/user-attachments/assets/7328c91b-c9fa-43ac-a8fd-8c63c9b676d3
 
 ### Keybinds
 
-HyprWave supports keybinds for toggling visibility and expanding details. Add these to your compositor config:
+HyprWave supports keybinds for toggling visibility, expanding details, and controlling media playback. Add these to your compositor config:
 
 #### Hyprland
 
 Add to `~/.config/hypr/hyprland.conf`:
 
 ```conf
-# HyprWave keybinds
+# HyprWave - Window Controls
 bind = SUPER_SHIFT, M, exec, hyprwave-toggle visibility
 bind = SUPER, M, exec, hyprwave-toggle expand
+
+# HyprWave - Media Controls (NEW in v0.9.2)
+bind = SUPER, P, exec, hyprwave-toggle play
+bind = SUPER, PERIOD, exec, hyprwave-toggle next
+bind = SUPER, COMMA, exec, hyprwave-toggle prev
 ```
 
 Then reload: `hyprctl reload`
@@ -295,8 +311,14 @@ Add to `~/.config/niri/config.kdl`:
 
 ```kdl
 binds {
-    Mod+Shift+M { spawn "hyprwave-toggle" "visibility"; }
-    Mod+M { spawn "hyprwave-toggle" "expand"; }
+    // HyprWave - Window Controls
+    MOD+SHIFT+M { spawn-sh "hyprwave-toggle visibility"; }
+    MOD+M { spawn-sh "hyprwave-toggle expand"; }
+    
+    // HyprWave - Media Controls (NEW in v0.9.2)
+    MOD+P { spawn-sh "hyprwave-toggle play"; }
+    MOD+PERIOD { spawn-sh "hyprwave-toggle next"; }
+    MOD+COMMA { spawn-sh "hyprwave-toggle prev"; }
 }
 ```
 
@@ -307,19 +329,50 @@ Then reload: `niri msg action reload-config`
 Add to `~/.config/sway/config`:
 
 ```conf
-# HyprWave keybinds
+# HyprWave - Window Controls
 bindsym $mod+Shift+M exec hyprwave-toggle visibility
 bindsym $mod+M exec hyprwave-toggle expand
+
+# HyprWave - Media Controls (NEW in v0.9.2)
+bindsym $mod+P exec hyprwave-toggle play
+bindsym $mod+period exec hyprwave-toggle next
+bindsym $mod+comma exec hyprwave-toggle prev
 ```
 
 Then reload: `swaymsg reload`
 
+#### Alternative: Media Keys
+
+If you have dedicated media keys, you can map them directly:
+
+**Hyprland:**
+```conf
+bind = , XF86AudioPlay, exec, hyprwave-toggle play
+bind = , XF86AudioNext, exec, hyprwave-toggle next
+bind = , XF86AudioPrev, exec, hyprwave-toggle prev
+```
+
+**Niri:**
+```kdl
+XF86AUDIOPLAY { spawn-sh "hyprwave-toggle play"; }
+XF86AUDIONEXT { spawn-sh "hyprwave-toggle next"; }
+XF86AUDIOPREV { spawn-sh "hyprwave-toggle prev"; }
+```
+
 #### What the Keybinds Do:
 
+**Window Controls:**
 - **Toggle Visibility** (`Super+Shift+M`) - Smoothly hides/shows entire HyprWave with slide animation
 - **Toggle Expand** (`Super+M`) - Shows/hides album details
   - Works even in visualizer mode - expanded section appears without exiting idle mode
   - If HyprWave is hidden, this will show it AND expand in one smooth motion
+
+**Media Controls (NEW in v0.9.2):**
+- **Play/Pause** (`Super+P`) - Toggle playback
+- **Next Track** (`Super+Period`) - Skip to next track
+- **Previous Track** (`Super+Comma`) - Go to previous track
+
+These media controls work from anywhere - even during gameplay or when HyprWave is hidden!
 
 ### Keybind Demo
 
@@ -340,6 +393,25 @@ Add to `~/.config/niri/config.kdl`:
 ```kdl
 spawn-at-startup "hyprwave"
 ```
+
+## Gaming Support
+
+HyprWave v0.9.2 adds perfect gaming integration! Control your music during gameplay without touching the mouse:
+
+- ✅ **Works during active gameplay** - Media keybinds function even when games have focus
+- ✅ **No mouse needed** - Keep hands on keyboard/controller
+- ✅ **Works when hidden** - Control music even if HyprWave is minimized
+- ✅ **Instant response** - Direct MPRIS control with no lag
+
+Simply set up the media control keybinds (see Keybinds section above) and press them during gameplay to skip tracks, pause music, or go back!
+
+**Tested Games:**
+- Terraria
+- Cuphead
+- Fallout New Vegas
+
+<img width="1366" height="768" alt="2026-02-15 13-24-28" src="https://github.com/user-attachments/assets/935e4124-3b14-4a39-afb6-bae5a1251de6" />
+
 
 ## Troubleshooting
 
@@ -373,9 +445,10 @@ Refer to Issues for a more precise explanation.
 ### Keybinds not working
 
 1. Verify `hyprwave-toggle` is installed: `which hyprwave-toggle`
-2. Test manually: `hyprwave-toggle visibility` (with HyprWave running)
+2. Test manually: `hyprwave-toggle play` (with HyprWave running and music playing)
 3. Check your compositor config for syntax errors
 4. Reload your compositor config after adding keybinds
+5. For media keybinds: Ensure HyprWave is running and connected to a music player
 
 ### Album art not loading
 
@@ -400,13 +473,15 @@ Resources are searched in this order:
 
 Config: `~/.config/hyprwave/config.conf`
 
-## Roadmap
+## Changelog
 
-### v0.9.0 (Current)
-- Dot Matrix Display (DMD) with idle mode animation
-- Configurable dot matrix display settings
-- Improved mouse interaction handling
-- Bug fixes and performance improvements
+### v0.9.2 (Latest)
+- **NEW:** Media control keybinds (play/pause, next, previous)
+- **NEW:** Gaming support - control music during gameplay
+- **NEW:** Direct MPRIS control via keyboard shortcuts
+- Improved keyboard-only workflow support
+
+## Roadmap
 
 ### v1.0.0 (Goals)
 - Theming system with pre-built themes
@@ -436,6 +511,7 @@ Open source. Free to use, modify, and distribute.
 
 - **Issues:** [GitHub Issues](https://github.com/shantanubaddar/hyprwave/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/shantanubaddar/hyprwave/discussions)
+- **Subreddit:** [r/hyprwave](https://www.reddit.com/r/hyprwave/)
 
 ## Stargazers
 
