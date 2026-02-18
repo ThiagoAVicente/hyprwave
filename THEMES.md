@@ -989,6 +989,395 @@ For my GOAT Don Toliver, a special theme for his upcoming album, OCTANE.
 }
 ```
 
+## Love Sick
+
+<img width="727" height="483" alt="2026-02-18 11-12-27" src="https://github.com/user-attachments/assets/96355d03-dc2a-44b3-aa84-6ab58004d89f" />
+
+```css
+
+:root {
+    /* Background Colors - Rainy Night */
+    --bg-primary: rgba(20, 25, 35, 0.75);
+    --bg-secondary: rgba(25, 30, 40, 0.75);
+    --bg-album-cover: rgba(30, 35, 45, 0.85);
+    --bg-album-secondary: rgba(35, 40, 50, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Cool Steel Blue */
+    --btn-default: rgba(100, 120, 150, 0.85);
+    --btn-default-secondary: rgba(90, 110, 140, 0.85);
+    --btn-default-hover: rgba(120, 140, 170, 0.92);
+    --btn-default-hover-secondary: rgba(110, 130, 160, 0.92);
+    
+    /* Button Colors - Play/Pause - Hot Pink Neon */
+    --btn-play: rgba(255, 80, 180, 0.95);
+    --btn-play-secondary: rgba(240, 60, 160, 0.95);
+    --btn-play-hover: rgba(255, 100, 195, 0.98);
+    --btn-play-hover-secondary: rgba(255, 90, 185, 0.98);
+    --btn-play-active: rgba(230, 50, 150, 0.95);
+    --btn-play-active-secondary: rgba(210, 40, 130, 0.95);
+    
+    /* Button Colors - Expand - Warm Orange Neon */
+    --btn-expand: rgba(255, 150, 80, 0.95);
+    --btn-expand-secondary: rgba(245, 130, 60, 0.95);
+    --btn-expand-hover: rgba(255, 170, 100, 0.98);
+    --btn-expand-hover-secondary: rgba(255, 160, 90, 0.98);
+    --btn-expand-active: rgba(235, 120, 50, 0.95);
+    --btn-expand-active-secondary: rgba(220, 110, 40, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(50, 60, 75, 0.25);
+    --progress-fill-start: rgba(255, 80, 180, 0.95);
+    --progress-fill-end: rgba(255, 150, 80, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 80, 180, 0.98);
+    --handle-hover: rgba(255, 100, 195, 1.0);
+    --handle-border: rgba(230, 50, 150, 0.5);
+    --handle-shadow: rgba(255, 80, 180, 0.7);
+    
+    /* Text Colors - Bright on dark rain */
+    --text-primary: rgba(240, 245, 255, 0.95);
+    --text-secondary: rgba(210, 220, 235, 0.85);
+    --text-tertiary: rgba(170, 185, 210, 0.75);
+    --text-muted: rgba(130, 145, 175, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(80, 95, 120, 0.35);
+    --border-button: rgba(100, 115, 140, 0.3);
+    --border-button-hover: rgba(120, 135, 160, 0.45);
+    --border-play: rgba(255, 80, 180, 0.4);
+    --border-play-hover: rgba(255, 100, 195, 0.55);
+    --border-expand: rgba(255, 150, 80, 0.4);
+    --border-expand-hover: rgba(255, 170, 100, 0.55);
+    
+    /* Shadow Colors - Neon glow */
+    --shadow-default: rgba(0, 0, 0, 0.5);
+    --shadow-button: rgba(0, 0, 0, 0.4);
+    --shadow-play: rgba(255, 80, 180, 0.6);
+    --shadow-play-hover: rgba(255, 100, 195, 0.8);
+    --shadow-expand: rgba(255, 150, 80, 0.6);
+    --shadow-expand-hover: rgba(255, 170, 100, 0.8);
+    --shadow-focus: rgba(255, 80, 180, 0.8);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - neon shop sign glow */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 100, 195, 0.98),
+        rgba(255, 170, 100, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 16px rgba(255, 80, 180, 0.8),
+                0 0 10px rgba(255, 150, 80, 0.6);
+}
+```
+
+## Pink Punk
+
+<img width="664" height="368" alt="2026-02-18 11-15-26" src="https://github.com/user-attachments/assets/ef4914b0-8fda-4b10-9a9f-00e220a9644a" />
+
+```css
+
+
+:root {
+    /* Background Colors - Soft Pink Clouds */
+    --bg-primary: rgba(255, 230, 240, 0.75);
+    --bg-secondary: rgba(255, 220, 235, 0.75);
+    --bg-album-cover: rgba(255, 210, 230, 0.85);
+    --bg-album-secondary: rgba(255, 200, 225, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Soft Rose */
+    --btn-default: rgba(255, 180, 210, 0.85);
+    --btn-default-secondary: rgba(245, 170, 200, 0.85);
+    --btn-default-hover: rgba(255, 200, 225, 0.92);
+    --btn-default-hover-secondary: rgba(255, 190, 215, 0.92);
+    
+    /* Button Colors - Play/Pause - Hot Pink */
+    --btn-play: rgba(255, 60, 150, 0.95);
+    --btn-play-secondary: rgba(240, 50, 135, 0.95);
+    --btn-play-hover: rgba(255, 80, 165, 0.98);
+    --btn-play-hover-secondary: rgba(255, 70, 155, 0.98);
+    --btn-play-active: rgba(230, 45, 125, 0.95);
+    --btn-play-active-secondary: rgba(215, 40, 115, 0.95);
+    
+    /* Button Colors - Expand - Magenta */
+    --btn-expand: rgba(230, 80, 180, 0.95);
+    --btn-expand-secondary: rgba(220, 70, 170, 0.95);
+    --btn-expand-hover: rgba(245, 100, 195, 0.98);
+    --btn-expand-hover-secondary: rgba(235, 90, 185, 0.98);
+    --btn-expand-active: rgba(210, 60, 160, 0.95);
+    --btn-expand-active-secondary: rgba(200, 50, 150, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(255, 200, 220, 0.25);
+    --progress-fill-start: rgba(255, 60, 150, 0.95);
+    --progress-fill-end: rgba(230, 80, 180, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 60, 150, 0.98);
+    --handle-hover: rgba(255, 80, 165, 1.0);
+    --handle-border: rgba(230, 45, 125, 0.5);
+    --handle-shadow: rgba(255, 60, 150, 0.6);
+    
+    /* Text Colors - Dark on light pink */
+    --text-primary: rgba(80, 30, 50, 0.95);
+    --text-secondary: rgba(100, 45, 65, 0.85);
+    --text-tertiary: rgba(130, 70, 90, 0.75);
+    --text-muted: rgba(160, 100, 120, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(255, 150, 190, 0.35);
+    --border-button: rgba(255, 130, 175, 0.3);
+    --border-button-hover: rgba(255, 110, 160, 0.45);
+    --border-play: rgba(255, 60, 150, 0.4);
+    --border-play-hover: rgba(255, 80, 165, 0.55);
+    --border-expand: rgba(230, 80, 180, 0.4);
+    --border-expand-hover: rgba(245, 100, 195, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.15);
+    --shadow-button: rgba(0, 0, 0, 0.1);
+    --shadow-play: rgba(255, 60, 150, 0.4);
+    --shadow-play-hover: rgba(255, 80, 165, 0.6);
+    --shadow-expand: rgba(230, 80, 180, 0.4);
+    --shadow-expand-hover: rgba(245, 100, 195, 0.6);
+    --shadow-focus: rgba(255, 60, 150, 0.6);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - sakura petal gradient */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 80, 165, 0.98),
+        rgba(245, 100, 195, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 12px rgba(255, 60, 150, 0.5);
+}
+
+```
+
+## Glacier
+
+<img width="657" height="369" alt="2026-02-18 11-17-29" src="https://github.com/user-attachments/assets/99e3005c-a272-4b76-a6ef-c6afa7579fa6" />
+
+```css
+
+:root {
+    /* Background Colors - Icy White */
+    --bg-primary: rgba(230, 240, 245, 0.75);
+    --bg-secondary: rgba(220, 235, 242, 0.75);
+    --bg-album-cover: rgba(210, 230, 240, 0.85);
+    --bg-album-secondary: rgba(200, 225, 238, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Ice Blue */
+    --btn-default: rgba(160, 200, 220, 0.85);
+    --btn-default-secondary: rgba(150, 190, 210, 0.85);
+    --btn-default-hover: rgba(180, 215, 235, 0.92);
+    --btn-default-hover-secondary: rgba(170, 205, 225, 0.92);
+    
+    /* Button Colors - Play/Pause - Glacier Blue */
+    --btn-play: rgba(100, 180, 220, 0.95);
+    --btn-play-secondary: rgba(90, 170, 210, 0.95);
+    --btn-play-hover: rgba(120, 200, 235, 0.98);
+    --btn-play-hover-secondary: rgba(110, 190, 225, 0.98);
+    --btn-play-active: rgba(80, 160, 200, 0.95);
+    --btn-play-active-secondary: rgba(70, 150, 190, 0.95);
+    
+    /* Button Colors - Expand - Deep Ice */
+    --btn-expand: rgba(70, 140, 180, 0.95);
+    --btn-expand-secondary: rgba(60, 130, 170, 0.95);
+    --btn-expand-hover: rgba(90, 160, 200, 0.98);
+    --btn-expand-hover-secondary: rgba(80, 150, 190, 0.98);
+    --btn-expand-active: rgba(50, 120, 160, 0.95);
+    --btn-expand-active-secondary: rgba(45, 110, 150, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(180, 210, 225, 0.25);
+    --progress-fill-start: rgba(100, 180, 220, 0.95);
+    --progress-fill-end: rgba(70, 140, 180, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(100, 180, 220, 0.98);
+    --handle-hover: rgba(120, 200, 235, 1.0);
+    --handle-border: rgba(80, 160, 200, 0.5);
+    --handle-shadow: rgba(100, 180, 220, 0.5);
+    
+    /* Text Colors - Dark blue on ice */
+    --text-primary: rgba(30, 60, 80, 0.95);
+    --text-secondary: rgba(50, 80, 100, 0.85);
+    --text-tertiary: rgba(80, 110, 130, 0.75);
+    --text-muted: rgba(110, 140, 160, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(140, 180, 200, 0.35);
+    --border-button: rgba(130, 170, 190, 0.3);
+    --border-button-hover: rgba(120, 160, 180, 0.45);
+    --border-play: rgba(100, 180, 220, 0.4);
+    --border-play-hover: rgba(120, 200, 235, 0.55);
+    --border-expand: rgba(70, 140, 180, 0.4);
+    --border-expand-hover: rgba(90, 160, 200, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.15);
+    --shadow-button: rgba(0, 0, 0, 0.1);
+    --shadow-play: rgba(80, 160, 200, 0.3);
+    --shadow-play-hover: rgba(100, 180, 220, 0.5);
+    --shadow-expand: rgba(60, 130, 170, 0.3);
+    --shadow-expand-hover: rgba(80, 150, 190, 0.5);
+    --shadow-focus: rgba(100, 180, 220, 0.5);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - glacier blue gradient */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(120, 200, 235, 0.98),
+        rgba(80, 150, 190, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 10px rgba(100, 180, 220, 0.5);
+}
+
+```
+
+## Nebula
+
+<img width="678" height="374" alt="2026-02-18 11-19-35" src="https://github.com/user-attachments/assets/6590cec1-0228-4060-bcf4-38460b1c194c" />
+
+```css
+
+
+:root {
+    /* Background Colors - Deep Space */
+    --bg-primary: rgba(10, 15, 25, 0.75);
+    --bg-secondary: rgba(15, 20, 30, 0.75);
+    --bg-album-cover: rgba(20, 25, 35, 0.85);
+    --bg-album-secondary: rgba(25, 30, 40, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Deep Blue */
+    --btn-default: rgba(60, 80, 120, 0.85);
+    --btn-default-secondary: rgba(50, 70, 110, 0.85);
+    --btn-default-hover: rgba(80, 100, 140, 0.92);
+    --btn-default-hover-secondary: rgba(70, 90, 130, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Orange Star */
+    --btn-play: rgba(255, 180, 80, 0.95);
+    --btn-play-secondary: rgba(245, 160, 60, 0.95);
+    --btn-play-hover: rgba(255, 200, 100, 0.98);
+    --btn-play-hover-secondary: rgba(255, 190, 90, 0.98);
+    --btn-play-active: rgba(235, 150, 50, 0.95);
+    --btn-play-active-secondary: rgba(225, 140, 40, 0.95);
+    
+    /* Button Colors - Expand - Deep Teal Nebula */
+    --btn-expand: rgba(50, 140, 160, 0.95);
+    --btn-expand-secondary: rgba(40, 130, 150, 0.95);
+    --btn-expand-hover: rgba(70, 160, 180, 0.98);
+    --btn-expand-hover-secondary: rgba(60, 150, 170, 0.98);
+    --btn-expand-active: rgba(30, 120, 140, 0.95);
+    --btn-expand-active-secondary: rgba(25, 110, 130, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(40, 50, 70, 0.25);
+    --progress-fill-start: rgba(255, 180, 80, 0.95);
+    --progress-fill-end: rgba(50, 140, 160, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 180, 80, 0.98);
+    --handle-hover: rgba(255, 200, 100, 1.0);
+    --handle-border: rgba(235, 150, 50, 0.5);
+    --handle-shadow: rgba(255, 180, 80, 0.7);
+    
+    /* Text Colors - Starlight on void */
+    --text-primary: rgba(255, 240, 220, 0.95);
+    --text-secondary: rgba(220, 210, 195, 0.85);
+    --text-tertiary: rgba(180, 175, 165, 0.75);
+    --text-muted: rgba(140, 140, 135, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(70, 85, 115, 0.35);
+    --border-button: rgba(80, 95, 125, 0.3);
+    --border-button-hover: rgba(90, 105, 135, 0.45);
+    --border-play: rgba(255, 180, 80, 0.4);
+    --border-play-hover: rgba(255, 200, 100, 0.55);
+    --border-expand: rgba(50, 140, 160, 0.4);
+    --border-expand-hover: rgba(70, 160, 180, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(255, 180, 80, 0.6);
+    --shadow-play-hover: rgba(255, 200, 100, 0.8);
+    --shadow-expand: rgba(50, 140, 160, 0.5);
+    --shadow-expand-hover: rgba(70, 160, 180, 0.7);
+    --shadow-focus: rgba(255, 180, 80, 0.8);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - cosmic fire and ice */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 200, 100, 0.98),
+        rgba(255, 160, 70, 0.98),
+        rgba(70, 160, 180, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 14px rgba(255, 180, 80, 0.7),
+                0 0 8px rgba(50, 140, 160, 0.5);
+}
+
+```
+
+
 
 
 
