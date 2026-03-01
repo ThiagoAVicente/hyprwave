@@ -98,6 +98,16 @@ static gboolean re_enable_transitions(gpointer user_data) {
 }
 
 static AppState *global_state = NULL;
+static gboolean start_hidden = FALSE;  // For --start-hidden flag
+
+// Delayed reveal for smooth position changes
+static gboolean delayed_reveal_window(gpointer user_data) {
+    AppState *state = (AppState *)user_data;
+    if (state && state->window_revealer) {
+        gtk_revealer_set_reveal_child(GTK_REVEALER(state->window_revealer), TRUE);
+    }
+    return G_SOURCE_REMOVE;
+}
 
 static gboolean morph_animation_tick_callback(GtkWidget *widget,
                                                GdkFrameClock *frame_clock,
@@ -448,41 +458,6 @@ static void handle_sigusr2(int sig) {
     
     // Normal expand toggle (not in idle mode)
     on_expand_clicked(NULL, global_state);
-}
-
-
-// Media control signal handlers (for gaming/keyboard-only use)
-static void handle_play_pause(int sig) {
-    if (!global_state || !global_state->mpris_proxy) return;
-    g_print("⏯️  Play/Pause toggled via keybind\n");
-    g_dbus_proxy_call(global_state->mpris_proxy, "PlayPause", NULL,
-                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
-}
-
-static void handle_next_track(int sig) {
-    if (!global_state || !global_state->mpris_proxy) return;
-    g_print("⏭️  Next track via keybind\n");
-    
-    // Notify vertical display about skip
-    if (global_state->vertical_display) {
-        vertical_display_notify_skip(global_state->vertical_display);
-    }
-    
-    g_dbus_proxy_call(global_state->mpris_proxy, "Next", NULL,
-                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
-}
-
-static void handle_prev_track(int sig) {
-    if (!global_state || !global_state->mpris_proxy) return;
-    g_print("⏮️  Previous track via keybind\n");
-    
-    // Notify vertical display about skip
-    if (global_state->vertical_display) {
-        vertical_display_notify_skip(global_state->vertical_display);
-    }
-    
-    g_dbus_proxy_call(global_state->mpris_proxy, "Previous", NULL,
-                      G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
 }
 
 
@@ -1985,7 +1960,17 @@ if (state->layout->is_vertical) {
     gtk_revealer_set_transition_duration(GTK_REVEALER(window_revealer), 0);
     gtk_revealer_set_transition_duration(GTK_REVEALER(revealer), 0);
     
-    gtk_revealer_set_reveal_child(GTK_REVEALER(window_revealer), TRUE);
+    // Handle --start-hidden flag for smooth position changes
+    if (start_hidden) {
+        // Start hidden, restore transition, then reveal after 100ms
+        gtk_revealer_set_reveal_child(GTK_REVEALER(window_revealer), FALSE);
+        gtk_revealer_set_transition_duration(GTK_REVEALER(window_revealer), window_duration);
+        gtk_revealer_set_transition_duration(GTK_REVEALER(revealer), internal_duration);
+        g_timeout_add(100, delayed_reveal_window, state);
+    } else {
+        // Normal startup - show immediately
+        gtk_revealer_set_reveal_child(GTK_REVEALER(window_revealer), TRUE);
+    }
     gtk_widget_queue_allocate(window);
     while (g_main_context_pending(NULL)) {
         g_main_context_iteration(NULL, FALSE);
@@ -2027,14 +2012,6 @@ if (state->layout->is_vertical) {
     global_state = state;
     signal(SIGUSR1, handle_sigusr1);
     signal(SIGUSR2, handle_sigusr2);
-    
-    // Media control signals for keyboard-only/gaming use
-    signal(SIGRTMIN, handle_play_pause);      // Play/Pause
-    signal(SIGRTMIN+1, handle_next_track);    // Next
-    signal(SIGRTMIN+2, handle_prev_track);    // Previous
-    
-    g_print("🎮 Media control keybinds enabled:\n");
-    g_print("   Play/Pause, Next, Previous can be controlled via keybinds\n");
 
     // Setup D-Bus name watcher to monitor player appearance/disappearance
     GDBusConnection *bus = g_bus_get_sync(G_BUS_TYPE_SESSION, NULL, NULL);
@@ -2161,6 +2138,14 @@ static void on_shutdown(GtkApplication *app, gpointer user_data) {
 
 
 int main(int argc, char **argv) {
+    // Parse command line arguments
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "--start-hidden") == 0) {
+            start_hidden = TRUE;
+            g_print("🎬 Starting hidden for smooth transition\n");
+        }
+    }
+    
     GtkApplication *app = gtk_application_new("com.hyprwave.app", G_APPLICATION_DEFAULT_FLAGS);
     
     // Connect signals
@@ -2169,7 +2154,8 @@ int main(int argc, char **argv) {
     
     // Note: shutdown callback will be connected in activate() since we need AppState*
     
-    int status = g_application_run(G_APPLICATION(app), argc, argv);
+    // Don't pass argc/argv to GTK - it doesn't understand our custom --start-hidden flag
+    int status = g_application_run(G_APPLICATION(app), 0, NULL);
     g_object_unref(app);
     return status;
 }
