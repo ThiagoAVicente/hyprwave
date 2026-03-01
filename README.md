@@ -1,9 +1,10 @@
-# hyprwave - v0.9.2 (latest release)
+# hyprwave - v1.0 (STABLE)
 
-A sleek, modern music control bar for Wayland compositors (Hyprland, Niri, Sway, etc.) with MPRIS integration.
+A sleek, modern music control bar for Wayland compositors (Hyprland, Niri, Sway, etc.) with MPRIS integration, 14 built-in themes, and dynamic customization.
 
-Updates till now: Multi-Anchor support, Notifications, Music Controls, CSS Styling (control bar, expanded section and notifications), launching it as an application, huge UI bug fixing, ability to seek to different song parts via click or drag and click, volume controls, audio visualizer with idle mode animation (for horizontal mode), 8-bit dot matrix info bar with idle mode animation (for vertical layouts).
-Dynamic Island Inspired Animation added between visualizer and control bar transformations. All visual bugs fixed. Direct media control keybinds for keyboard-only/gaming use.
+hyprwave is officially complete!
+
+**NEW in v1.0:** Dynamic position switching, theme system with 14 pre-made themes, smooth animations for all changes!
 
 Built and primarily tested on Niri, for all Wayland compositors that support GTK4 and GTK4-layer-shell.
 
@@ -13,15 +14,32 @@ Check out the subreddit for posting your rices, themes, favorite albums -> https
 
 <img width="870" height="282" alt="verticle-control-bar" src="https://github.com/user-attachments/assets/04b4c73d-0cee-4fea-a596-8b80942bdbf1" /><br>
 
-
-
 <img width="289" height="301" alt="image" src="https://github.com/user-attachments/assets/53a82a39-b073-4b05-8aaf-bdc3698a0fe9" />
 
 <img width="240" height="314" alt="image" src="https://github.com/user-attachments/assets/7085b6b7-35d6-4cb7-8256-875929546b42" />
 
+Style hyprwave to your taste with 14 built-in themes, or create your own!
 
+## Built-in Themes
 
-Style hyprwave to your taste via the style.css!
+HyprWave v1.0 includes 14 stunning themes:
+
+- **mystic-portal** - Purple/pink portal with blue depths (default)
+- **nebula** - Deep space with orange stars and teal nebulae
+- **octane** - Pure black and white minimalist (shown below)
+- **noir-esque** - Dark backdrop with cream and gold accents
+- **emerald-splash** - Dark forest with bright emerald and mint
+- **pink-europa** - Dark silhouettes with pink and peach sunset
+- **glacier** - Icy white with glacier blue accents
+- **midnight-city** - Dark cityscape with bright blue accents
+- **prismarine-wave** - Turquoise ocean waves
+- **pink-punk** - Soft pink clouds with hot pink accents
+- **love-sick** - Rainy night with hot pink and orange neon
+- **lucid-dreaming** - Dark base with vibrant pink/purple/cyan retro
+- **neo-lights** - Dark base with multi-color neon accents
+- **deathstar** - Dark smoky with silver/cyan racing aesthetic
+
+Switch instantly with `hyprwave-toggle set-theme <name>`!
 
 ## OCTANE THEME 
 
@@ -32,8 +50,7 @@ Style hyprwave to your taste via the style.css!
 
 <img width="629" height="351" alt="2026-01-29 18-10-19" src="https://github.com/user-attachments/assets/88fab7b1-160e-496d-9836-27cc5db8dbd5" />
 
-Check out THEMES.md to get the theme, and more!
-
+Check out THEMES.md to see all 14 themes with previews!
 
 ## Screenshots & GIFs
 
@@ -62,7 +79,6 @@ Check out THEMES.md to get the theme, and more!
 
 ### Dot Matrix Display (Idle Mode - Vertical)
 
-
 https://github.com/user-attachments/assets/c4e84d3c-c93f-4bfe-b5e9-f7888b3b8b53
 
 <img width="1366" height="768" alt="2026-02-01 22-40-45" src="https://github.com/user-attachments/assets/b7bd1bc0-f56f-437c-b938-adc9210e3c83" />
@@ -87,22 +103,76 @@ https://github.com/user-attachments/assets/c4e84d3c-c93f-4bfe-b5e9-f7888b3b8b53
 
 ## Features
 
+- **14 Built-in Themes** - From minimalist to vibrant, switch themes instantly (NEW in v1.0)
+- **Dynamic Position Switching** - Move HyprWave to any edge on-the-fly (NEW in v1.0)
+- **Custom Theme Support** - Create and share your own themes easily (NEW in v1.0)
 - **Elegant Design** - Glassmorphic UI with smooth animations
 - **MPRIS Integration** - Works with Spotify, VLC, and any MPRIS-compatible player
 - **Album Art Display** - Fetches and displays album artwork
 - **Live Progress Tracking** - Real-time progress bar with countdown timer
 - **Full Playback Controls** - Play/Pause, Next, Previous buttons
-- **Media Control Keybinds** - Direct keyboard shortcuts for play/pause, next, previous (NEW in v0.9.2)
+- **Media Control Keybinds** - Direct keyboard shortcuts for play/pause, next, previous
 - **Expandable Panel** - Toggle to reveal detailed track information
 - **Volume Control** - Double-click album cover to show/hide volume slider
 - **Audio Visualizer** - Real-time audio visualization with idle mode animation
-- **Idle Mode** - Automatically morphs into visualizer after inactivity
+- **Dot Matrix Display** - 8-bit style scrolling text for vertical layouts
+- **Idle Mode** - Automatically morphs into visualizer/display after inactivity
 - **Now Playing Notifications** - Elegant slide-in notifications for track changes
 - **Configurable Layout** - Position on any screen edge (left, right, top, bottom)
-- **Keybind Support** - Hide/show, expand, and media controls with keyboard shortcuts
-- **Gaming Support** - Control music during gameplay without moving mouse (NEW in v0.9.2)
-- **Minimal Resource Usage** - ~80-95MB RAM, <0.3% CPU, on idle mode, drops to 20-30MB RAM.
-- **Dynamic Island inspired animation** - Control bar morphs into idle mode bars via smooth animations
+- **Gaming Support** - Control music during gameplay without moving mouse
+- **Minimal Resource Usage** - ~80-95MB RAM, <0.3% CPU, drops to 20-30MB in idle mode
+- **Dynamic Island Inspired Animation** - Smooth morphing transitions between modes
+
+### Theme System (NEW in v1.0)
+
+Switch between 14 beautiful pre-made themes instantly:
+
+```bash
+hyprwave-toggle set-theme nebula      # Deep space theme
+hyprwave-toggle set-theme octane      # Minimalist black/white
+hyprwave-toggle set-theme glacier     # Icy blue and white
+hyprwave-toggle set-theme love-sick   # Hot pink neon
+```
+
+HyprWave will smoothly slide out, apply the new theme, and slide back in with the new colors!
+
+**Theme Features:**
+- Instant switching with smooth animations
+- 14 carefully designed color palettes
+- User themes take priority over system themes
+- Easy to create your own (see Customization section)
+- Share themes with the community
+
+**Example:-**
+
+
+https://github.com/user-attachments/assets/c3f54fad-f519-4b22-b707-e4f87544620e
+
+
+
+### Dynamic Position Switching (NEW in v1.0)
+
+Move HyprWave to any edge without editing config files:
+
+```bash
+hyprwave-toggle set-position left     # Move to left edge
+hyprwave-toggle set-position right    # Move to right edge
+hyprwave-toggle set-position top      # Move to top edge
+hyprwave-toggle set-position bottom   # Move to bottom edge
+```
+
+Perfect for:
+- **Multi-monitor setups** - Move between screens on the fly
+- **Different workflows** - Vertical for music focus, horizontal for minimal
+- **Experimenting** - Try all positions to find your favorite
+- **Live streaming** - Reposition without restarting
+
+**Example:-**
+
+
+https://github.com/user-attachments/assets/25fbc88e-5ea7-4d47-835d-341270dfba24
+
+
 
 ### Audio Visualizer
 
@@ -110,38 +180,38 @@ The visualizer captures your system audio playback and displays real-time freque
 
 Features:
 - Real-time audio frequency visualization
-- Smooth fade animations between modes
+- Smooth Dynamic Island-style morph animations
 - Configurable idle timeout
 - Option to disable visualizer completely
 - Works only in horizontal layouts (top/bottom edges)
 
 ### Dot Matrix Display 
-Ever felt nostalgic about old mp3 players? Revive it back with vertical mode, with a minimalistic idle mode, scrolling name of song and artist name, PAUSE animations and PLAY animations. Mouse hover restores it back to the control bar. Also, if you don't want the dot matrix font, you are free to replace it with any other font, just place it in the same place as the VT323 font where it is placed after install, and fix the size of font in style.css if needed. 
 
-### Media Control Keybinds (NEW in v0.9.2)
+Ever felt nostalgic about old mp3 players? Revive it with vertical mode! Features a minimalistic idle mode with:
+- Scrolling song and artist names
+- Animated PAUSE and PLAY indicators
+- Retro 8-bit dot matrix aesthetic
+- Mouse hover restores control bar
+- Customizable font (replace VT323 with your own)
+
+### Media Control Keybinds
 
 Control your music without touching the mouse! Perfect for:
 - **Gaming** - Skip tracks during gameplay without interrupting
 - **Keyboard-only workflows** - No need to move your hand to the mouse
 - **Quick access** - Instant play/pause, next, previous from any app
 
-Simply bind the new media control commands to your preferred keys and control music from anywhere!
-
-### Collapsed State
-
-The control bar sits on your chosen screen edge with essential controls.
-
-### Expanded State
-
-Shows album cover, track title, artist, progress bar, and time remaining.
+Simply bind the media control commands to your preferred keys!
 
 ### Now Playing Notifications
 
 Smooth slide-in notifications appear in the top-right corner when tracks change, showing album art, song title, and artist.
 
+https://github.com/user-attachments/assets/7328c91b-c9fa-43ac-a8fd-8c63c9b676d3
+
 ### Volume Control
 
-Double-click the album cover to reveal the volume bar. The volume bar auto-hides after 3 seconds of inactivity or when you collapse the expanded state.
+Double-click the album cover to reveal the volume slider. Auto-hides after 3 seconds of inactivity.
 
 ## Installation
 
@@ -149,25 +219,27 @@ Double-click the album cover to reveal the volume bar. The volume bar auto-hides
 
 ```bash
 # Arch Linux / Manjaro
-sudo pacman -S gtk4 gtk4-layer-shell pulseaudio
+sudo pacman -S gtk4 gtk4-layer-shell pulseaudio glib-networking
 
 # Ubuntu / Debian
-sudo apt install libgtk-4-dev gtk4-layer-shell libpulse-dev
+sudo apt install libgtk-4-dev gtk4-layer-shell libpulse-dev glib-networking
 
 # Fedora
-sudo dnf install gtk4-devel gtk4-layer-shell-devel pulseaudio-libs-devel
+sudo dnf install gtk4-devel gtk4-layer-shell-devel pulseaudio-libs-devel glib-networking
 ```
+
 ### Arch(-based)
-Also, Massive update - hyprwave is now on AUR.
-Simply install it with:
+
+HyprWave is available on the AUR! Install with:
 
 ```bash
 yay -S hyprwave
 ```
 
-It will not give you the bleeding new updates, but the latest releases.
+The AUR package includes all 14 themes and the latest stable release.
 
 ### NixOS
+
 Installing the package:
 1. Download the `default.nix` File.
 2. Add the package to your `configuration.nix` or `flake.nix`:
@@ -183,7 +255,9 @@ environment.systemPackages = with pkgs; [
 3. Rebuild.
 
 Testing the package without installing:
-1. Run `nix run github:shantanubaddar/hyprwave`.
+```bash
+nix run github:shantanubaddar/hyprwave
+```
 
 ### Building from Source
 
@@ -200,6 +274,7 @@ make install
 The installer will:
 - Copy binary to `~/.local/bin/hyprwave`
 - Install resources to `~/.local/share/hyprwave/`
+- Install all 14 themes to `~/.local/share/hyprwave/themes/`
 - Install `hyprwave-toggle` script for keybinds
 - Create config at `~/.config/hyprwave/config.conf`
 
@@ -209,17 +284,18 @@ The installer will:
 
 1. **Install and run HyprWave**: `hyprwave`
 2. **Start a music player** (Spotify, VLC, etc.)
-3. **Control your music** with the on-screen controls or keybinds
-4. **Use keybinds** for quick access (see configuration below)
+3. **Control your music** with on-screen controls or keybinds
+4. **Try different themes**: `hyprwave-toggle set-theme octane`
+5. **Change position**: `hyprwave-toggle set-position bottom`
 
 ### Supported Music Players
 
-Fully Supported:
+**Fully Supported:**
 - Spotify (Desktop app)
 - VLC Media Player
 - Any MPRIS2-compatible player (Rhythmbox, Audacious, MPD with mpDris2, etc.)
 
-Limited Support:
+**Limited Support:**
 - Web browsers - Basic controls only, limited metadata
 
 ## Configuration
@@ -234,6 +310,7 @@ Edit `~/.config/hyprwave/config.conf`:
 [General]
 # Edge to anchor HyprWave to
 # Options: right, left, top, bottom
+# Note: You can also change this on-the-fly with: hyprwave-toggle set-position <edge>
 edge = right
 
 # Margin from the screen edge (in pixels)
@@ -252,43 +329,78 @@ enabled = true
 idle_timeout = 5
 
 [VerticalDisplay]
-enabled=true
-idle_timeout=5
+enabled = true
+idle_timeout = 5
 
 [MusicPlayer]
-preference = spotify,vlc
+preference = spotify,vlc,firefox,brave
 ```
 
-**Layout Options:**
-- **`edge = right`** - Vertical layout on right edge (default)
-- **`edge = left`** - Vertical layout on left edge
-- **`edge = top`** - Horizontal layout on top edge
-- **`edge = bottom`** - Horizontal layout on bottom edge
+**Note:** Position and themes can be changed on-the-fly without editing config!
 
-**Notification Options:**
-- **`enabled = true`** - Master switch for all notifications
-- **`now_playing = true`** - Show "Now Playing" notifications when tracks change
+## Customization
 
-**Visualizer Options:**
-- **`enabled = true`** - Enable audio visualizer (horizontal layouts only)
-- **`idle_timeout = 5`** - Seconds of inactivity before visualizer appears (0 to disable)
+### Switching Themes
 
-**Dot Matrix Display Options:**
-- **`enabled = true`** - Enable audio visualizer (vertical layouts only)
-- **`idle_timeout = 5`** - Seconds of inactivity before display appears (0 to disable)
+Change themes instantly:
 
-**Music Player:**
-Still being developed, however, if you are a spotify user, don't worry about it. Your experience will be smooth all around.
+```bash
+# Try any of the 14 built-in themes
+hyprwave-toggle set-theme nebula
+hyprwave-toggle set-theme octane
+hyprwave-toggle set-theme midnight-city
+hyprwave-toggle set-theme glacier
 
-### How Notifications Will Appear
+# List all available themes
+hyprwave-toggle set-theme invalid  # Shows theme list
+```
 
-https://github.com/user-attachments/assets/7328c91b-c9fa-43ac-a8fd-8c63c9b676d3
+### Creating Custom Themes
 
-### Keybinds
+1. **Create themes directory (AUR users):**
+   ```bash
+   mkdir -p ~/.local/share/hyprwave/themes
+   ```
 
-HyprWave supports keybinds for toggling visibility, expanding details, and controlling media playback. Add these to your compositor config:
+2. **Copy a template:**
+   ```bash
+   # AUR users
+   cp /usr/share/hyprwave/themes/mystic-portal.css ~/.local/share/hyprwave/themes/my-theme.css
+   
+   # Local install users
+   cd ~/.local/share/hyprwave/themes
+   cp mystic-portal.css my-theme.css
+   ```
 
-#### Hyprland
+3. **Edit the CSS variables:**
+   ```bash
+   nano ~/.local/share/hyprwave/themes/my-theme.css
+   ```
+   
+   Customize the `:root` variables:
+   - Background colors
+   - Button colors (play, expand, default)
+   - Progress bar gradients
+   - Text colors
+   - Border and shadow effects
+   - Visualizer bar gradients
+
+4. **Apply your theme:**
+   ```bash
+   hyprwave-toggle set-theme my-theme
+   ```
+
+### Sharing Themes
+
+Share your custom themes with the community!
+
+1. Upload your `.css` file to [r/hyprwave](https://www.reddit.com/r/hyprwave/)
+2. Others can download and copy to their themes folder
+3. Popular themes may be included in future releases!
+
+## Keybinds
+
+### Hyprland
 
 Add to `~/.config/hypr/hyprland.conf`:
 
@@ -297,82 +409,77 @@ Add to `~/.config/hypr/hyprland.conf`:
 bind = SUPER_SHIFT, M, exec, hyprwave-toggle visibility
 bind = SUPER, M, exec, hyprwave-toggle expand
 
-# HyprWave - Media Controls (NEW in v0.9.2)
+# HyprWave - Media Controls
 bind = SUPER, P, exec, hyprwave-toggle play
 bind = SUPER, PERIOD, exec, hyprwave-toggle next
 bind = SUPER, COMMA, exec, hyprwave-toggle prev
+
+# HyprWave - Theme Switching (v1.0)
+bind = SUPER_SHIFT, T, exec, hyprwave-toggle set-theme nebula
+bind = SUPER_CTRL, T, exec, hyprwave-toggle set-theme octane
+
+# HyprWave - Position Switching (v1.0)
+bind = SUPER_SHIFT, LEFT, exec, hyprwave-toggle set-position left
+bind = SUPER_SHIFT, RIGHT, exec, hyprwave-toggle set-position right
+bind = SUPER_SHIFT, UP, exec, hyprwave-toggle set-position top
+bind = SUPER_SHIFT, DOWN, exec, hyprwave-toggle set-position bottom
 ```
 
-Then reload: `hyprctl reload`
+Reload: `hyprctl reload`
 
-#### Niri
+### Niri
 
 Add to `~/.config/niri/config.kdl`:
 
 ```kdl
 binds {
-    // HyprWave - Window Controls
+    // Window Controls
     MOD+SHIFT+M { spawn-sh "hyprwave-toggle visibility"; }
     MOD+M { spawn-sh "hyprwave-toggle expand"; }
     
-    // HyprWave - Media Controls (NEW in v0.9.2)
+    // Media Controls
     MOD+P { spawn-sh "hyprwave-toggle play"; }
     MOD+PERIOD { spawn-sh "hyprwave-toggle next"; }
     MOD+COMMA { spawn-sh "hyprwave-toggle prev"; }
+    
+    // Theme Switching (v1.0)
+    MOD+SHIFT+T { spawn-sh "hyprwave-toggle set-theme nebula"; }
+    
+    // Position Switching (v1.0)
+    MOD+SHIFT+LEFT { spawn-sh "hyprwave-toggle set-position left"; }
+    MOD+SHIFT+RIGHT { spawn-sh "hyprwave-toggle set-position right"; }
+    MOD+SHIFT+UP { spawn-sh "hyprwave-toggle set-position top"; }
+    MOD+SHIFT+DOWN { spawn-sh "hyprwave-toggle set-position bottom"; }
 }
 ```
 
-Then reload: `niri msg action reload-config`
+Reload: `niri msg action reload-config`
 
-#### Sway
+### Sway
 
 Add to `~/.config/sway/config`:
 
 ```conf
-# HyprWave - Window Controls
+# Window Controls
 bindsym $mod+Shift+M exec hyprwave-toggle visibility
 bindsym $mod+M exec hyprwave-toggle expand
 
-# HyprWave - Media Controls (NEW in v0.9.2)
+# Media Controls
 bindsym $mod+P exec hyprwave-toggle play
 bindsym $mod+period exec hyprwave-toggle next
 bindsym $mod+comma exec hyprwave-toggle prev
+
+# Theme Switching (v1.0)
+bindsym $mod+Shift+T exec hyprwave-toggle set-theme nebula
+
+# Position Switching (v1.0)
+bindsym $mod+Shift+Left exec hyprwave-toggle set-position left
+bindsym $mod+Shift+Right exec hyprwave-toggle set-position right
+bindsym $mod+Shift+Up exec hyprwave-toggle set-position top
+bindsym $mod+Shift+Down exec hyprwave-toggle set-position bottom
 ```
 
-Then reload: `swaymsg reload`
-
-#### Alternative: Media Keys
-
-If you have dedicated media keys, you can map them directly:
-
-**Hyprland:**
-```conf
-bind = , XF86AudioPlay, exec, hyprwave-toggle play
-bind = , XF86AudioNext, exec, hyprwave-toggle next
-bind = , XF86AudioPrev, exec, hyprwave-toggle prev
-```
-
-**Niri:**
-```kdl
-XF86AUDIOPLAY { spawn-sh "hyprwave-toggle play"; }
-XF86AUDIONEXT { spawn-sh "hyprwave-toggle next"; }
-XF86AUDIOPREV { spawn-sh "hyprwave-toggle prev"; }
-```
-
-#### What the Keybinds Do:
-
-**Window Controls:**
-- **Toggle Visibility** (`Super+Shift+M`) - Smoothly hides/shows entire HyprWave with slide animation
-- **Toggle Expand** (`Super+M`) - Shows/hides album details
-  - Works even in visualizer mode - expanded section appears without exiting idle mode
-  - If HyprWave is hidden, this will show it AND expand in one smooth motion
-
-**Media Controls (NEW in v0.9.2):**
-- **Play/Pause** (`Super+P`) - Toggle playback
-- **Next Track** (`Super+Period`) - Skip to next track
-- **Previous Track** (`Super+Comma`) - Go to previous track
-
-These media controls work from anywhere - even during gameplay or when HyprWave is hidden!
+Reload: `swaymsg reload`
 
 ### Keybind Demo
 
@@ -380,44 +487,32 @@ https://github.com/user-attachments/assets/5bd27ec4-6b51-46fb-bf6e-fcb3cb3252b1
 
 ### Auto-start
 
-#### Hyprland
-
-Add to `~/.config/hypr/hyprland.conf`:
+**Hyprland:**
 ```conf
 exec-once = hyprwave
 ```
 
-#### Niri
-
-Add to `~/.config/niri/config.kdl`:
+**Niri:**
 ```kdl
 spawn-at-startup "hyprwave"
 ```
 
 ## Gaming Support
 
-HyprWave v0.9.2 adds perfect gaming integration! Control your music during gameplay without touching the mouse:
+Control your music during gameplay without touching the mouse!
 
-- ✅ **Works during active gameplay** - Media keybinds function even when games have focus
-- ✅ **No mouse needed** - Keep hands on keyboard/controller
-- ✅ **Works when hidden** - Control music even if HyprWave is minimized
-- ✅ **Instant response** - Direct MPRIS control with no lag
+- ✅ Works during active gameplay
+- ✅ No mouse needed
+- ✅ Works when hidden
+- ✅ Instant response
 
-Simply set up the media control keybinds (see Keybinds section above) and press them during gameplay to skip tracks, pause music, or go back!
-
-**Tested Games:**
-- Terraria
-- Cuphead
-- Fallout New Vegas
+**Tested Games:** Terraria, Cuphead, Fallout New Vegas
 
 <img width="1366" height="768" alt="2026-02-15 13-24-28" src="https://github.com/user-attachments/assets/935e4124-3b14-4a39-afb6-bae5a1251de6" />
-
 
 ## Troubleshooting
 
 ### Black box around HyprWave (Hyprland)
-
-If you see a black box around HyprWave, disable blur for the overlay:
 
 Add to `hyprland.conf`:
 ```conf
@@ -425,75 +520,60 @@ layerrule = noblur, hyprwave
 layerrule = noblur, hyprwave-notification
 ```
 
-If that doesn't work, it's most probably a broken gtk4 or gtk4-layer-shell package - just remove them, reinstall them, and try again.
+### Theme/Position changes not working
 
-Refer to Issues for a more precise explanation.
+1. Ensure HyprWave is running
+2. Test manually: `hyprwave-toggle set-theme nebula`
+3. For AUR users: First theme change creates `~/.local/share/hyprwave/`
 
-### Visualizer not working
+### Other Issues
 
-1. Ensure PulseAudio is running: `pulseaudio --check`
-2. Check that visualizer is enabled in config: `enabled = true` under `[Visualizer]`
-3. Visualizer only works in horizontal layouts (top/bottom edges)
-4. Check console output for PulseAudio connection errors
-
-### Notifications not appearing
-
-1. Check that notifications are enabled in `~/.config/hyprwave/config.conf`
-2. Verify both `enabled = true` and `now_playing = true` under `[Notifications]`
-3. Restart HyprWave after config changes
-
-### Keybinds not working
-
-1. Verify `hyprwave-toggle` is installed: `which hyprwave-toggle`
-2. Test manually: `hyprwave-toggle play` (with HyprWave running and music playing)
-3. Check your compositor config for syntax errors
-4. Reload your compositor config after adding keybinds
-5. For media keybinds: Ensure HyprWave is running and connected to a music player
-
-### Album art not loading
-
-HyprWave requires the music player to provide album art URLs via MPRIS. Desktop apps work better than web browsers for this.
+See [GitHub Issues](https://github.com/shantanubaddar/hyprwave/issues) for common problems and solutions.
 
 ## Technical Details
 
 - **Language:** C
-- **GUI Framework:** GTK4
-- **Layer Shell:** gtk4-layer-shell (Wayland overlay)
-- **Audio:** PulseAudio (for visualizer)
-- **IPC:** D-Bus (MPRIS2 protocol)
-- **Memory:** ~80-95MB RAM (base), ~100-110MB with visualizer active
-- **CPU:** <0.3% idle, <1% during updates, <2% with visualizer
+- **GUI:** GTK4
+- **Layer Shell:** gtk4-layer-shell
+- **Audio:** PulseAudio
+- **IPC:** D-Bus (MPRIS2)
+- **Memory:** ~80-95MB RAM (base), ~100-110MB with visualizer
+- **CPU:** <0.3% idle, <2% with visualizer
 
 ### File Paths
 
-Resources are searched in this order:
-1. Local directory: `./icons/`, `./style.css` (for development)
-2. User install: `~/.local/share/hyprwave/`
-3. System install: `/usr/share/hyprwave/`
+**System Install (AUR):**
+- Binary: `/usr/bin/hyprwave`
+- System resources: `/usr/share/hyprwave/`
+- System themes: `/usr/share/hyprwave/themes/`
+- User themes: `~/.local/share/hyprwave/themes/`
+- User CSS: `~/.local/share/hyprwave/style.css`
 
-Config: `~/.config/hyprwave/config.conf`
+**Local Install:**
+- Binary: `~/.local/bin/hyprwave`
+- Resources: `~/.local/share/hyprwave/`
+- Themes: `~/.local/share/hyprwave/themes/`
+
+**Config:** `~/.config/hyprwave/config.conf`
 
 ## Changelog
 
-### v0.9.2 (Latest)
-- **NEW:** Media control keybinds (play/pause, next, previous)
-- **NEW:** Gaming support - control music during gameplay
-- **NEW:** Direct MPRIS control via keyboard shortcuts
-- Improved keyboard-only workflow support
-
-## Roadmap
-
-### v1.0.0 (Goals)
-- Theming system with pre-built themes
-- Custom dimensions and colors via config
+### v1.0 (STABLE - Latest)
+- **NEW:** Theme system with 14 pre-made themes
+- **NEW:** Dynamic position switching
+- **NEW:** Custom theme support
+- **NEW:** Smooth animations for all changes
+- **NEW:** `set-theme` and `set-position` commands
+- Improved path handling for AUR/local installs
+- User themes override system themes
+- **STABLE RELEASE** - Production ready!
 
 ## Contributing
 
-Contributions welcome! Feel free to:
-- Report bugs via [GitHub Issues](https://github.com/shantanubaddar/hyprwave/issues)
-- Submit feature requests
-- Create pull requests
-- Share your custom themes/icons
+Contributions welcome!
+- [GitHub Issues](https://github.com/shantanubaddar/hyprwave/issues) - Report bugs
+- [GitHub Discussions](https://github.com/shantanubaddar/hyprwave/discussions) - Feature requests
+- [r/hyprwave](https://www.reddit.com/r/hyprwave/) - Share themes and rices
 
 ## License
 
@@ -503,9 +583,8 @@ Open source. Free to use, modify, and distribute.
 
 - Built with [GTK4](https://gtk.org/)
 - Uses [gtk4-layer-shell](https://github.com/wmww/gtk-layer-shell)
-- Audio capture via [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/)
+- Audio via [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/)
 - Inspired by [waybar](https://github.com/Alexays/Waybar)
-- MPRIS specification by [freedesktop.org](https://www.freedesktop.org/)
 
 ## Support
 
