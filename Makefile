@@ -23,6 +23,7 @@ install: $(TARGET)
 	cp hyprwave-toggle.sh $(BINDIR)/hyprwave-toggle
 	chmod +x $(BINDIR)/hyprwave-toggle
 	install -Dm644 style.css $(DATADIR)/style.css
+	install -Dm644 style-layout.css $(DATADIR)/style-layout.css
 	@mkdir -p $(DATADIR)/icons
 	install -m644 icons/play.svg $(DATADIR)/icons/
 	install -m644 icons/pause.svg $(DATADIR)/icons/
@@ -36,6 +37,8 @@ install: $(TARGET)
 	install -m644 icons/volume-low.svg $(DATADIR)/icons/
 	install -m644 icons/volume-medium.svg $(DATADIR)/icons/
 	install -m644 icons/volume-high.svg $(DATADIR)/icons/
+	@mkdir -p $(DATADIR)/themes
+	install -m644 themes/*.css $(DATADIR)/themes/
 	mkdir -p $(HOME)/.local/share/fonts/hyprwave
 	cp fonts/VT323-Regular.ttf $(HOME)/.local/share/fonts/hyprwave/
 	fc-cache -f $(HOME)/.local/share/fonts/hyprwave
