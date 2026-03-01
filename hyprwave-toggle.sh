@@ -35,23 +35,63 @@ get_hyprwave_pid() {
 if [ "$ACTION" = "set-theme" ]; then
     if [ -z "$ARG" ]; then
         echo "Usage: hyprwave-toggle set-theme <theme-name>"
-        echo "Available themes in ~/.local/share/hyprwave/themes/"
+        echo "Available themes:"
+        # List from both locations
+        if [ -d "$HOME/.local/share/hyprwave/themes" ]; then
+            ls -1 "$HOME/.local/share/hyprwave/themes/" 2>/dev/null | sed 's/.css$//' | sed 's/^/   /'
+        fi
+        if [ -d "/usr/share/hyprwave/themes" ]; then
+            ls -1 "/usr/share/hyprwave/themes/" 2>/dev/null | sed 's/.css$//' | sed 's/^/   /'
+        fi
         exit 1
     fi
     
     STYLE_FILE="$HOME/.local/share/hyprwave/style.css"
-    THEME_FILE="$HOME/.local/share/hyprwave/themes/$ARG.css"
-    LAYOUT_FILE="$HOME/.local/share/hyprwave/style-layout.css"
+    LAYOUT_FILE_USER="$HOME/.local/share/hyprwave/style-layout.css"
+    LAYOUT_FILE_SYSTEM="/usr/share/hyprwave/style-layout.css"
+    
+    # Check user themes first, then system themes
+    THEME_FILE=""
+    if [ -f "$HOME/.local/share/hyprwave/themes/$ARG.css" ]; then
+        THEME_FILE="$HOME/.local/share/hyprwave/themes/$ARG.css"
+    elif [ -f "/usr/share/hyprwave/themes/$ARG.css" ]; then
+        THEME_FILE="/usr/share/hyprwave/themes/$ARG.css"
+    fi
     
     # Check if theme exists
-    if [ ! -f "$THEME_FILE" ]; then
+    if [ -z "$THEME_FILE" ]; then
         echo "❌ Theme not found: $ARG"
-        echo "   Looking for: $THEME_FILE"
         echo ""
         echo "Available themes:"
-        ls -1 "$HOME/.local/share/hyprwave/themes/" 2>/dev/null | sed 's/.css$//' | sed 's/^/   - /'
+        echo "  User themes (~/.local/share/hyprwave/themes/):"
+        if [ -d "$HOME/.local/share/hyprwave/themes" ]; then
+            ls -1 "$HOME/.local/share/hyprwave/themes/" 2>/dev/null | sed 's/.css$//' | sed 's/^/    /'
+        else
+            echo "    (none - create custom themes here!)"
+        fi
+        echo ""
+        echo "  System themes (/usr/share/hyprwave/themes/):"
+        if [ -d "/usr/share/hyprwave/themes" ]; then
+            ls -1 "/usr/share/hyprwave/themes/" 2>/dev/null | sed 's/.css$//' | sed 's/^/    /'
+        else
+            echo "    (none)"
+        fi
         exit 1
     fi
+    
+    # Find layout file (prefer user, fallback to system)
+    LAYOUT_FILE=""
+    if [ -f "$LAYOUT_FILE_USER" ]; then
+        LAYOUT_FILE="$LAYOUT_FILE_USER"
+    elif [ -f "$LAYOUT_FILE_SYSTEM" ]; then
+        LAYOUT_FILE="$LAYOUT_FILE_SYSTEM"
+    else
+        echo "❌ Error: style-layout.css not found"
+        exit 1
+    fi
+    
+    # Ensure style.css location exists (for AUR users)
+    mkdir -p "$HOME/.local/share/hyprwave"
     
     # Check if hyprwave is running
     HYPRWAVE_PID=$(get_hyprwave_pid)
@@ -65,7 +105,7 @@ if [ "$ACTION" = "set-theme" ]; then
         # 2. Wait for slide-out animation
         sleep 0.4
         
-        # 3. Concatenate theme + layout into style.css
+        # 3. Concatenate theme + layout into user's style.css
         cat "$THEME_FILE" "$LAYOUT_FILE" > "$STYLE_FILE"
         
         # 4. Kill current instance
