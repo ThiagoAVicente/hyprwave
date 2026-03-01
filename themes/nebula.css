@@ -1,0 +1,103 @@
+/* ========================================
+   HyprWave - Nebula Theme
+   Deep space with orange stars and teal nebulae
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Space */
+    --bg-primary: rgba(10, 15, 25, 0.75);
+    --bg-secondary: rgba(15, 20, 30, 0.75);
+    --bg-album-cover: rgba(20, 25, 35, 0.85);
+    --bg-album-secondary: rgba(25, 30, 40, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Deep Blue */
+    --btn-default: rgba(60, 80, 120, 0.85);
+    --btn-default-secondary: rgba(50, 70, 110, 0.85);
+    --btn-default-hover: rgba(80, 100, 140, 0.92);
+    --btn-default-hover-secondary: rgba(70, 90, 130, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Orange Star */
+    --btn-play: rgba(255, 180, 80, 0.95);
+    --btn-play-secondary: rgba(245, 160, 60, 0.95);
+    --btn-play-hover: rgba(255, 200, 100, 0.98);
+    --btn-play-hover-secondary: rgba(255, 190, 90, 0.98);
+    --btn-play-active: rgba(235, 150, 50, 0.95);
+    --btn-play-active-secondary: rgba(225, 140, 40, 0.95);
+    
+    /* Button Colors - Expand - Deep Teal Nebula */
+    --btn-expand: rgba(50, 140, 160, 0.95);
+    --btn-expand-secondary: rgba(40, 130, 150, 0.95);
+    --btn-expand-hover: rgba(70, 160, 180, 0.98);
+    --btn-expand-hover-secondary: rgba(60, 150, 170, 0.98);
+    --btn-expand-active: rgba(30, 120, 140, 0.95);
+    --btn-expand-active-secondary: rgba(25, 110, 130, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(40, 50, 70, 0.25);
+    --progress-fill-start: rgba(255, 180, 80, 0.95);
+    --progress-fill-end: rgba(50, 140, 160, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 180, 80, 0.98);
+    --handle-hover: rgba(255, 200, 100, 1.0);
+    --handle-border: rgba(235, 150, 50, 0.5);
+    --handle-shadow: rgba(255, 180, 80, 0.7);
+    
+    /* Text Colors - Starlight on void */
+    --text-primary: rgba(255, 240, 220, 0.95);
+    --text-secondary: rgba(220, 210, 195, 0.85);
+    --text-tertiary: rgba(180, 175, 165, 0.75);
+    --text-muted: rgba(140, 140, 135, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(70, 85, 115, 0.35);
+    --border-button: rgba(80, 95, 125, 0.3);
+    --border-button-hover: rgba(90, 105, 135, 0.45);
+    --border-play: rgba(255, 180, 80, 0.4);
+    --border-play-hover: rgba(255, 200, 100, 0.55);
+    --border-expand: rgba(50, 140, 160, 0.4);
+    --border-expand-hover: rgba(70, 160, 180, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(255, 180, 80, 0.6);
+    --shadow-play-hover: rgba(255, 200, 100, 0.8);
+    --shadow-expand: rgba(50, 140, 160, 0.5);
+    --shadow-expand-hover: rgba(70, 160, 180, 0.7);
+    --shadow-focus: rgba(255, 180, 80, 0.8);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - cosmic fire and ice */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 200, 100, 0.98),
+        rgba(255, 160, 70, 0.98),
+        rgba(70, 160, 180, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 14px rgba(255, 180, 80, 0.7),
+                0 0 8px rgba(50, 140, 160, 0.5);
+}
+
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255, 200, 100, 0.98);
+    letter-spacing: 0px;
+    line-height: 1.2;
+}

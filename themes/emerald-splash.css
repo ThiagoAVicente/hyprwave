@@ -1,0 +1,103 @@
+/* ========================================
+   HyprWave - Emerald Splash Theme
+   Dark forest with bright emerald and mint
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Forest */
+    --bg-primary: rgba(10, 20, 15, 0.75);
+    --bg-secondary: rgba(15, 25, 20, 0.75);
+    --bg-album-cover: rgba(20, 30, 25, 0.85);
+    --bg-album-secondary: rgba(25, 35, 30, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Forest Green */
+    --btn-default: rgba(60, 120, 80, 0.85);
+    --btn-default-secondary: rgba(50, 110, 70, 0.85);
+    --btn-default-hover: rgba(80, 140, 100, 0.92);
+    --btn-default-hover-secondary: rgba(70, 130, 90, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Emerald */
+    --btn-play: rgba(80, 255, 160, 0.95);
+    --btn-play-secondary: rgba(70, 245, 150, 0.95);
+    --btn-play-hover: rgba(100, 255, 180, 0.98);
+    --btn-play-hover-secondary: rgba(90, 255, 170, 0.98);
+    --btn-play-active: rgba(60, 230, 140, 0.95);
+    --btn-play-active-secondary: rgba(50, 220, 130, 0.95);
+    
+    /* Button Colors - Expand - Mint Green */
+    --btn-expand: rgba(120, 240, 180, 0.95);
+    --btn-expand-secondary: rgba(110, 230, 170, 0.95);
+    --btn-expand-hover: rgba(140, 255, 200, 0.98);
+    --btn-expand-hover-secondary: rgba(130, 250, 190, 0.98);
+    --btn-expand-active: rgba(100, 220, 160, 0.95);
+    --btn-expand-active-secondary: rgba(90, 210, 150, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(30, 50, 40, 0.25);
+    --progress-fill-start: rgba(80, 255, 160, 0.95);
+    --progress-fill-end: rgba(120, 240, 180, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(80, 255, 160, 0.98);
+    --handle-hover: rgba(100, 255, 180, 1.0);
+    --handle-border: rgba(60, 230, 140, 0.5);
+    --handle-shadow: rgba(80, 255, 160, 0.7);
+    
+    /* Text Colors - Bright on dark forest */
+    --text-primary: rgba(220, 255, 235, 0.95);
+    --text-secondary: rgba(190, 235, 210, 0.85);
+    --text-tertiary: rgba(160, 210, 185, 0.75);
+    --text-muted: rgba(120, 170, 145, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(50, 90, 70, 0.35);
+    --border-button: rgba(60, 100, 80, 0.3);
+    --border-button-hover: rgba(80, 120, 100, 0.45);
+    --border-play: rgba(80, 255, 160, 0.4);
+    --border-play-hover: rgba(100, 255, 180, 0.55);
+    --border-expand: rgba(120, 240, 180, 0.4);
+    --border-expand-hover: rgba(140, 255, 200, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(80, 255, 160, 0.6);
+    --shadow-play-hover: rgba(100, 255, 180, 0.8);
+    --shadow-expand: rgba(120, 240, 180, 0.5);
+    --shadow-expand-hover: rgba(140, 255, 200, 0.7);
+    --shadow-focus: rgba(80, 255, 160, 0.8);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - emerald splash */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(140, 255, 200, 0.98),
+        rgba(100, 255, 180, 0.98),
+        rgba(80, 255, 160, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 16px rgba(80, 255, 160, 0.8),
+                0 0 10px rgba(120, 240, 180, 0.6);
+}
+
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(100, 255, 180, 0.98);
+    letter-spacing: 0px;
+    line-height: 1.2;
+}

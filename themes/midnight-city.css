@@ -1,0 +1,91 @@
+/* ========================================
+   HyprWave - Midnight City Theme
+   Dark cityscape with bright blue accents
+   ======================================== */
+
+:root {
+    --bg-primary: rgba(12, 15, 25, 0.75);
+    --bg-secondary: rgba(18, 20, 30, 0.75);
+    --bg-album-cover: rgba(22, 25, 35, 0.85);
+    --bg-album-secondary: rgba(28, 30, 40, 0.85);
+    
+    --btn-default: rgba(80, 100, 160, 0.85);
+    --btn-default-secondary: rgba(70, 90, 150, 0.85);
+    --btn-default-hover: rgba(100, 120, 180, 0.92);
+    --btn-default-hover-secondary: rgba(90, 110, 170, 0.92);
+    
+    --btn-play: rgba(100, 180, 255, 0.95);
+    --btn-play-secondary: rgba(90, 170, 245, 0.95);
+    --btn-play-hover: rgba(120, 200, 255, 0.98);
+    --btn-play-hover-secondary: rgba(110, 190, 255, 0.98);
+    --btn-play-active: rgba(80, 160, 235, 0.95);
+    --btn-play-active-secondary: rgba(70, 150, 225, 0.95);
+    
+    --btn-expand: rgba(140, 200, 255, 0.95);
+    --btn-expand-secondary: rgba(130, 190, 245, 0.95);
+    --btn-expand-hover: rgba(160, 220, 255, 0.98);
+    --btn-expand-hover-secondary: rgba(150, 210, 255, 0.98);
+    --btn-expand-active: rgba(120, 180, 235, 0.95);
+    --btn-expand-active-secondary: rgba(110, 170, 225, 0.95);
+    
+    --progress-bg: rgba(35, 40, 60, 0.25);
+    --progress-fill-start: rgba(100, 180, 255, 0.95);
+    --progress-fill-end: rgba(140, 200, 255, 0.95);
+    
+    --handle-color: rgba(100, 180, 255, 0.98);
+    --handle-hover: rgba(120, 200, 255, 1.0);
+    --handle-border: rgba(80, 160, 235, 0.5);
+    --handle-shadow: rgba(100, 180, 255, 0.7);
+    
+    --text-primary: rgba(230, 240, 255, 0.95);
+    --text-secondary: rgba(200, 220, 245, 0.85);
+    --text-tertiary: rgba(170, 190, 220, 0.75);
+    --text-muted: rgba(130, 150, 180, 0.65);
+    
+    --border-primary: rgba(60, 75, 110, 0.35);
+    --border-button: rgba(70, 85, 120, 0.3);
+    --border-button-hover: rgba(90, 105, 140, 0.45);
+    --border-play: rgba(100, 180, 255, 0.4);
+    --border-play-hover: rgba(120, 200, 255, 0.55);
+    --border-expand: rgba(140, 200, 255, 0.4);
+    --border-expand-hover: rgba(160, 220, 255, 0.55);
+    
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(100, 180, 255, 0.6);
+    --shadow-play-hover: rgba(120, 200, 255, 0.8);
+    --shadow-expand: rgba(140, 200, 255, 0.5);
+    --shadow-expand-hover: rgba(160, 220, 255, 0.7);
+    --shadow-focus: rgba(100, 180, 255, 0.8);
+    
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(160, 220, 255, 0.98),
+        rgba(120, 200, 255, 0.98),
+        rgba(100, 180, 255, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 16px rgba(100, 180, 255, 0.8),
+                0 0 10px rgba(140, 200, 255, 0.6);
+}
+
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(120, 200, 255, 0.98);
+    letter-spacing: 0px;
+    line-height: 1.2;
+}

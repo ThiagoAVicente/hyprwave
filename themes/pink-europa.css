@@ -1,0 +1,103 @@
+/* ========================================
+   HyprWave - Pink Europa Theme
+   Dark silhouettes with pink and peach sunset
+   ======================================== */
+
+:root {
+    /* Background Colors - Deep Purple/Blue */
+    --bg-primary: rgba(25, 20, 40, 0.75);
+    --bg-secondary: rgba(30, 25, 45, 0.75);
+    --bg-album-cover: rgba(35, 30, 50, 0.85);
+    --bg-album-secondary: rgba(40, 35, 55, 0.85);
+    
+    /* Button Colors - Default (Prev/Next) - Soft Purple */
+    --btn-default: rgba(150, 100, 180, 0.85);
+    --btn-default-secondary: rgba(140, 90, 170, 0.85);
+    --btn-default-hover: rgba(170, 120, 200, 0.92);
+    --btn-default-hover-secondary: rgba(160, 110, 190, 0.92);
+    
+    /* Button Colors - Play/Pause - Bright Pink Sunset */
+    --btn-play: rgba(255, 140, 180, 0.95);
+    --btn-play-secondary: rgba(245, 130, 170, 0.95);
+    --btn-play-hover: rgba(255, 160, 200, 0.98);
+    --btn-play-hover-secondary: rgba(255, 150, 190, 0.98);
+    --btn-play-active: rgba(235, 120, 160, 0.95);
+    --btn-play-active-secondary: rgba(225, 110, 150, 0.95);
+    
+    /* Button Colors - Expand - Peach */
+    --btn-expand: rgba(255, 180, 140, 0.95);
+    --btn-expand-secondary: rgba(245, 170, 130, 0.95);
+    --btn-expand-hover: rgba(255, 200, 160, 0.98);
+    --btn-expand-hover-secondary: rgba(255, 190, 150, 0.98);
+    --btn-expand-active: rgba(235, 160, 120, 0.95);
+    --btn-expand-active-secondary: rgba(225, 150, 110, 0.95);
+    
+    /* Progress Bar Colors */
+    --progress-bg: rgba(50, 40, 70, 0.25);
+    --progress-fill-start: rgba(255, 140, 180, 0.95);
+    --progress-fill-end: rgba(255, 180, 140, 0.95);
+    
+    /* Slider Handle Colors */
+    --handle-color: rgba(255, 140, 180, 0.98);
+    --handle-hover: rgba(255, 160, 200, 1.0);
+    --handle-border: rgba(235, 120, 160, 0.5);
+    --handle-shadow: rgba(255, 140, 180, 0.7);
+    
+    /* Text Colors - Soft pink on dark */
+    --text-primary: rgba(255, 220, 235, 0.95);
+    --text-secondary: rgba(240, 200, 220, 0.85);
+    --text-tertiary: rgba(220, 180, 200, 0.75);
+    --text-muted: rgba(180, 150, 170, 0.65);
+    
+    /* Border Colors */
+    --border-primary: rgba(100, 80, 120, 0.35);
+    --border-button: rgba(120, 95, 140, 0.3);
+    --border-button-hover: rgba(140, 110, 160, 0.45);
+    --border-play: rgba(255, 140, 180, 0.4);
+    --border-play-hover: rgba(255, 160, 200, 0.55);
+    --border-expand: rgba(255, 180, 140, 0.4);
+    --border-expand-hover: rgba(255, 200, 160, 0.55);
+    
+    /* Shadow Colors */
+    --shadow-default: rgba(0, 0, 0, 0.6);
+    --shadow-button: rgba(0, 0, 0, 0.5);
+    --shadow-play: rgba(255, 140, 180, 0.6);
+    --shadow-play-hover: rgba(255, 160, 200, 0.8);
+    --shadow-expand: rgba(255, 180, 140, 0.5);
+    --shadow-expand-hover: rgba(255, 200, 160, 0.7);
+    --shadow-focus: rgba(255, 140, 180, 0.8);
+    
+    /* Spacing & Sizes */
+    --border-radius-container: 100px;
+    --border-radius-section: 20px;
+    --border-radius-album: 16px;
+    --border-radius-button: 50%;
+    --border-radius-progress: 2px;
+    
+    --padding-container: 12px;
+    --padding-section: 16px;
+}
+
+/* Visualizer bars - sunset gradient */
+.visualizer-bar {
+    background: linear-gradient(180deg, 
+        rgba(255, 160, 200, 0.98),
+        rgba(255, 140, 180, 0.98),
+        rgba(255, 180, 140, 0.98));
+    border-radius: 0px;
+    transition: all 0.05s ease-out;
+    margin: 0px;
+    min-width: 1px;
+    min-height: 3px;
+    box-shadow: 0 0 14px rgba(255, 140, 180, 0.7),
+                0 0 9px rgba(255, 180, 140, 0.5);
+}
+
+.vertical-display-label {
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(255, 160, 200, 0.98);
+    letter-spacing: 0px;
+    line-height: 1.2;
+}
