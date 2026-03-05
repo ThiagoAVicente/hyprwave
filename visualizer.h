@@ -4,23 +4,26 @@
 #include <gtk/gtk.h>
 #include <pulse/pulseaudio.h>
 
-#define VISUALIZER_BARS 55
-#define VISUALIZER_UPDATE_FPS 60
+#define VISUALIZER_MAX_BARS 128
 
 typedef struct {
     GtkWidget *container;  // Main container with bars
-    GtkWidget *bars[VISUALIZER_BARS];
-    
+    GtkWidget *bars[VISUALIZER_MAX_BARS];
+
     // PulseAudio context
     pa_threaded_mainloop *pa_mainloop;
     pa_mainloop_api *pa_mainloop_api;
     pa_context *pa_context;
     pa_stream *pa_stream;
-    
+
     // Audio data
-    gdouble bar_heights[VISUALIZER_BARS];
-    gdouble bar_smoothed[VISUALIZER_BARS];
-    
+    gdouble bar_heights[VISUALIZER_MAX_BARS];
+    gdouble bar_smoothed[VISUALIZER_MAX_BARS];
+
+    // Config
+    gint num_bars;
+    gint fps;
+
     // State
     gboolean is_showing;
     gboolean is_running;
@@ -30,7 +33,7 @@ typedef struct {
 } VisualizerState;
 
 // Initialize visualizer (horizontal layout only)
-VisualizerState* visualizer_init();
+VisualizerState* visualizer_init(gint num_bars, gint fps);
 
 // Show/hide visualizer (fades in/out)
 void visualizer_show(VisualizerState *state);

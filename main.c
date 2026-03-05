@@ -11,7 +11,10 @@
 #include "volume.h"
 #include "visualizer.h"
 #include "vertical_display.h"
-#include "morph-animation-system.h" 
+#include "morph-animation-system.h"
+#include "debug.h"
+
+gboolean debug_mode = FALSE;
 
 typedef struct {
     GtkWidget *window;
@@ -153,7 +156,7 @@ static gboolean morph_animation_tick_callback(GtkWidget *widget,
     {
         GtkAllocation alloc;
         gtk_widget_get_allocation(state->control_bar_container, &alloc);
-        g_print("  TICK t=%.3f eased=%.3f req=%dx%d ALLOC=%dx%d\n",
+        debug_print("  TICK t=%.3f eased=%.3f req=%dx%d ALLOC=%dx%d\n",
                 raw_progress, eased_progress,
                 current_width, current_height,
                 alloc.width, alloc.height);
@@ -255,7 +258,7 @@ static gboolean morph_animation_tick_callback(GtkWidget *widget,
                 // NOW start audio capture (after animation is done)
                 if (!state->visualizer->is_running) {
                     visualizer_start(state->visualizer);
-                    g_print("  ✓ Visualizer audio started (post-animation)\n");
+                    debug_print("  ✓ Visualizer audio started (post-animation)\n");
                 }
             }
         } else if (state->vertical_display) {
@@ -272,7 +275,7 @@ static gboolean morph_animation_tick_callback(GtkWidget *widget,
         // Re-enable CSS transitions after animation completes
         g_timeout_add(16, re_enable_transitions, state->control_bar_container);
         
-        g_print("✓ Animation complete - locked at %dx%d\n", anim->end_width, anim->end_height);
+        debug_print("✓ Animation complete - locked at %dx%d\n", anim->end_width, anim->end_height);
         
         // Remove tick callback
         gtk_widget_remove_tick_callback(widget, state->morph_tick_id);
@@ -298,7 +301,7 @@ static gboolean animate_button_fade(gpointer user_data) {
             gtk_widget_set_visible(state->next_btn, FALSE);
             gtk_widget_set_visible(state->expand_btn, FALSE);
             
-            g_print("  Buttons hidden - bar can now shrink\n");
+            debug_print("  Buttons hidden - bar can now shrink\n");
             
             state->morph_timer = 0;
             return G_SOURCE_REMOVE;
@@ -310,7 +313,7 @@ static gboolean animate_button_fade(gpointer user_data) {
             gtk_widget_set_visible(state->play_btn, TRUE);
             gtk_widget_set_visible(state->next_btn, TRUE);
             gtk_widget_set_visible(state->expand_btn, TRUE);
-            g_print("  Buttons visible again\n");
+            debug_print("  Buttons visible again\n");
         }
         
         // Fade in buttons
@@ -336,7 +339,7 @@ static gboolean delayed_control_bar_resize_vertical(gpointer user_data) {
     AppState *state = (AppState *)user_data;
     gtk_widget_set_size_request(state->control_bar_container, 32, 280);
     gtk_widget_queue_resize(state->control_bar_container);
-    g_print("  Vertical bar resized to: 32x280 (slim mode)\n");
+    debug_print("  Vertical bar resized to: 32x280 (slim mode)\n");
     return G_SOURCE_REMOVE;
 }
 
@@ -501,7 +504,7 @@ static gboolean enter_idle_mode(gpointer user_data) {
         return G_SOURCE_REMOVE;
     }
     
-    g_print("→ Morphing to idle mode (Dynamic Island animation)\n");
+    debug_print("→ Morphing to idle mode (Dynamic Island animation)\n");
     state->is_idle_mode = TRUE;
     
     // Cancel any existing animation
@@ -519,7 +522,7 @@ static gboolean enter_idle_mode(gpointer user_data) {
     gtk_widget_get_allocation(state->control_bar_container, &allocation_with_buttons);
     state->control_bar_width = allocation_with_buttons.width;
     state->control_bar_height = allocation_with_buttons.height;
-    g_print("  Captured control bar size (with buttons): %dx%d\n",
+    debug_print("  Captured control bar size (with buttons): %dx%d\n",
             state->control_bar_width, state->control_bar_height);
     
     // Setup animation parameters
@@ -569,14 +572,14 @@ static gboolean enter_idle_mode(gpointer user_data) {
     anim->end_width = 280;
     anim->end_height = 32;
     
-    g_print("  Starting animation from ACTUAL size: %dx%d → 280x32\n", 
+    debug_print("  Starting animation from ACTUAL size: %dx%d → 280x32\n", 
             anim->start_width, anim->start_height);
     
     // Visualizer opacity: start from current, animate to 1.0
     anim->start_viz_opacity = state->visualizer ? gtk_widget_get_opacity(state->visualizer->container) : 0.0;
     anim->end_viz_opacity = 1.0;
 
-    g_print("  viz_opacity start=%.3f end=%.3f\n",
+    debug_print("  viz_opacity start=%.3f end=%.3f\n",
             anim->start_viz_opacity, anim->end_viz_opacity);
     
     // Make visualizer visible (but transparent initially)
@@ -603,7 +606,7 @@ state->morph_tick_id = gtk_widget_add_tick_callback(
 static void exit_idle_mode(AppState *state) {
     if (!state->is_idle_mode || !state->visualizer) return;
     
-    g_print("← Morphing to control mode (Dynamic Island animation)\n");
+    debug_print("← Morphing to control mode (Dynamic Island animation)\n");
     state->is_idle_mode = FALSE;
     
     // Cancel any existing animation
@@ -644,7 +647,7 @@ static void exit_idle_mode(AppState *state) {
     anim->end_width = state->control_bar_width;
     anim->end_height = state->control_bar_height;
     
-    g_print("  Starting animation from ACTUAL size: %dx%d → %dx%d\n", 
+    debug_print("  Starting animation from ACTUAL size: %dx%d → %dx%d\n", 
             anim->start_width, anim->start_height,
             anim->end_width, anim->end_height);
     
@@ -652,7 +655,7 @@ static void exit_idle_mode(AppState *state) {
     anim->start_viz_opacity = state->visualizer ? gtk_widget_get_opacity(state->visualizer->container) : 1.0;
     anim->end_viz_opacity = 0.0;
 
-    g_print("  viz_opacity start=%.3f end=%.3f\n",
+    debug_print("  viz_opacity start=%.3f end=%.3f\n",
             anim->start_viz_opacity, anim->end_viz_opacity);
     
     // Start animation loop at 60fps
@@ -682,7 +685,7 @@ static gboolean enter_vertical_idle_mode(gpointer user_data) {
         return G_SOURCE_REMOVE;
     }
     
-    g_print("→ Morphing to vertical idle mode (Dynamic Island animation)\n");
+    debug_print("→ Morphing to vertical idle mode (Dynamic Island animation)\n");
     state->is_idle_mode = TRUE;
     
     // Hide volume if showing
@@ -701,7 +704,7 @@ static gboolean enter_vertical_idle_mode(gpointer user_data) {
     gtk_widget_get_allocation(state->control_bar_container, &allocation_with_buttons);
     state->control_bar_width = allocation_with_buttons.width;
     state->control_bar_height = allocation_with_buttons.height;
-    g_print("  Captured control bar size (with buttons): %dx%d\n",
+    debug_print("  Captured control bar size (with buttons): %dx%d\n",
             state->control_bar_width, state->control_bar_height);
     
     // Setup animation parameters
@@ -743,14 +746,14 @@ static gboolean enter_vertical_idle_mode(gpointer user_data) {
     anim->end_width = 32;    // Vertical slim mode
     anim->end_height = 280;
     
-    g_print("  Starting animation from ACTUAL size: %dx%d → 32x280\n", 
+    debug_print("  Starting animation from ACTUAL size: %dx%d → 32x280\n", 
             anim->start_width, anim->start_height);
     
     // Vertical display opacity: start from current, animate to 1.0
     anim->start_viz_opacity = gtk_widget_get_opacity(state->vertical_display->container);
     anim->end_viz_opacity = 1.0;
 
-    g_print("  vertical_display opacity start=%.3f end=%.3f\n",
+    debug_print("  vertical_display opacity start=%.3f end=%.3f\n",
             anim->start_viz_opacity, anim->end_viz_opacity);
     
     // Make vertical display visible (but transparent initially)
@@ -772,7 +775,7 @@ static gboolean enter_vertical_idle_mode(gpointer user_data) {
 static void exit_vertical_idle_mode(AppState *state) {
     if (!state->is_idle_mode || !state->vertical_display) return;
     
-    g_print("← Morphing to vertical control mode (Dynamic Island animation)\n");
+    debug_print("← Morphing to vertical control mode (Dynamic Island animation)\n");
     state->is_idle_mode = FALSE;
     
     // Cancel any existing animation
@@ -810,7 +813,7 @@ static void exit_vertical_idle_mode(AppState *state) {
     anim->end_width = state->control_bar_width;
     anim->end_height = state->control_bar_height;
     
-    g_print("  Starting animation from ACTUAL size: %dx%d → %dx%d\n", 
+    debug_print("  Starting animation from ACTUAL size: %dx%d → %dx%d\n", 
             anim->start_width, anim->start_height,
             anim->end_width, anim->end_height);
     
@@ -818,7 +821,7 @@ static void exit_vertical_idle_mode(AppState *state) {
     anim->start_viz_opacity = gtk_widget_get_opacity(state->vertical_display->container);
     anim->end_viz_opacity = 0.0;
 
-    g_print("  vertical_display opacity start=%.3f end=%.3f\n",
+    debug_print("  vertical_display opacity start=%.3f end=%.3f\n",
             anim->start_viz_opacity, anim->end_viz_opacity);
     
     // Start animation loop at 60fps (same tick callback!)
@@ -931,7 +934,7 @@ static void perform_seek(AppState *state, gdouble fraction) {
         g_dbus_proxy_call(state->mpris_proxy, "SetPosition",
             g_variant_new("(ox)", track_id, target_position),
             G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
-        g_print("Seeking to %.1f%% (position: %ld µs)\n", fraction * 100, target_position);
+        debug_print("Seeking to %.1f%% (position: %ld µs)\n", fraction * 100, target_position);
     }
     g_variant_unref(metadata);
 }
@@ -985,7 +988,7 @@ static gboolean on_button_release_event(GtkWidget *widget, GdkEvent *event, gpoi
     }
     
     gdouble value = gtk_range_get_value(GTK_RANGE(state->progress_bar));
-    g_print("Button released - seeking to %.1f%%\n", value * 100);
+    debug_print("Button released - seeking to %.1f%%\n", value * 100);
     perform_seek(state, value);
     g_timeout_add(500, clear_seeking_flag, state);
     
@@ -1082,7 +1085,7 @@ static gboolean show_pending_notification(gpointer user_data) {
             state->notification_timer = g_timeout_add(200, show_pending_notification, state);
             return G_SOURCE_REMOVE;
         }
-        g_print("Notification skipped - metadata incomplete\n");
+        debug_print("Notification skipped - metadata incomplete\n");
     } else {
         notification_show(state->notification, state->pending_title,
                           state->pending_artist, state->pending_art_url, "Now Playing");
@@ -1273,7 +1276,7 @@ static void on_player_name_changed(GDBusConnection *connection,
     if (state->current_player && g_strcmp0(name, state->current_player) == 0) {
         if (strlen(new_owner) == 0) {
             // Our player disappeared!
-            g_print("⚠ Player disappeared: %s\n", state->current_player);
+            debug_print("⚠ Player disappeared: %s\n", state->current_player);
             
             if (state->mpris_proxy) {
                 g_object_unref(state->mpris_proxy);
@@ -1297,7 +1300,7 @@ static void on_player_name_changed(GDBusConnection *connection,
     } else if (!state->current_player && g_str_has_prefix(name, "org.mpris.MediaPlayer2.")) {
         // A new player appeared and we're not connected to anything
         if (strlen(new_owner) > 0) {
-            g_print("✓ New player detected: %s\n", name);
+            debug_print("✓ New player detected: %s\n", name);
             find_active_player(state);
         }
     }
@@ -1327,7 +1330,7 @@ static void connect_to_player(AppState *state, const gchar *bus_name) {
         state->volume->mpris_proxy = state->mpris_proxy;
     }
     
-    g_print("Connected to player: %s\n", bus_name);
+    debug_print("Connected to player: %s\n", bus_name);
 }
 
 static void find_active_player(AppState *state) {
@@ -1370,7 +1373,7 @@ static void find_active_player(AppState *state) {
     if (available_players->len == 0) {
         g_ptr_array_free(available_players, TRUE);
         g_object_unref(dbus_proxy);
-        g_print("No MPRIS players found\n");
+        debug_print("No MPRIS players found\n");
         return;
     }
     
@@ -1378,11 +1381,11 @@ static void find_active_player(AppState *state) {
     
     // If we have preferences, search in order
     if (state->layout->player_preference && state->layout->player_preference_count > 0) {
-        g_print("Searching for preferred players...\n");
+        debug_print("Searching for preferred players...\n");
         
         for (gint i = 0; i < state->layout->player_preference_count; i++) {
             const gchar *pref = state->layout->player_preference[i];
-            g_print("  Looking for: %s\n", pref);
+            debug_print("  Looking for: %s\n", pref);
             
             // Check each available player
             for (guint j = 0; j < available_players->len; j++) {
@@ -1393,7 +1396,7 @@ static void find_active_player(AppState *state) {
                 if (g_ascii_strcasecmp(player_name, pref) == 0 ||
                     g_str_has_prefix(player_name, pref)) {
                     selected_player = bus_name;
-                    g_print("✓ Found preferred player: %s (%s)\n", pref, bus_name);
+                    debug_print("✓ Found preferred player: %s (%s)\n", pref, bus_name);
                     break;
                 }
             }
@@ -1402,12 +1405,12 @@ static void find_active_player(AppState *state) {
         }
         
         if (!selected_player) {
-            g_print("⚠ No preferred players found, skipping connection\n");
+            debug_print("⚠ No preferred players found, skipping connection\n");
         }
     } else {
         // No preference - connect to first available player (old behavior)
         selected_player = g_ptr_array_index(available_players, 0);
-        g_print("No player preference set, connecting to: %s\n", selected_player);
+        debug_print("No player preference set, connecting to: %s\n", selected_player);
     }
     
     if (selected_player) {
@@ -1459,7 +1462,7 @@ static void on_expand_clicked(GtkButton *button, gpointer user_data) {
     
     // SAFETY: Don't process if already transitioning
     if (state->morph_timer > 0) {
-        g_print("⸻ Expand blocked - morph animation in progress\n");
+        debug_print("⸻ Expand blocked - morph animation in progress\n");
         return;
     }
     
@@ -1508,10 +1511,10 @@ static void on_album_double_click(GtkGestureClick *gesture,
     if (n_press == 2 && state->volume) {
         if (state->volume->is_showing) {
             volume_hide(state->volume);
-            g_print("Volume control hidden via double-click\n");
+            debug_print("Volume control hidden via double-click\n");
         } else {
             volume_show(state->volume);
-            g_print("Volume control activated via double-click\n");
+            debug_print("Volume control activated via double-click\n");
         }
     }
 }
@@ -1519,7 +1522,7 @@ static void on_album_double_click(GtkGestureClick *gesture,
 static gboolean enable_smooth_transitions(gpointer user_data) {
     GtkWidget *window_revealer = GTK_WIDGET(user_data);
     gtk_revealer_set_transition_duration(GTK_REVEALER(window_revealer), 300);
-    g_print("Smooth transitions enabled\n");
+    debug_print("Smooth transitions enabled\n");
     return G_SOURCE_REMOVE;
 }
 
@@ -1820,7 +1823,7 @@ if (state->layout->is_vertical) {
         gtk_widget_set_visible(ghost_box, FALSE);
         gtk_overlay_add_overlay(GTK_OVERLAY(overlay), ghost_box);
         
-        g_print("✓ Ghost button overlay created for vertical mode\n");
+        debug_print("✓ Ghost button overlay created for vertical mode\n");
         
         final_control_widget = overlay;
     } else {
@@ -1831,7 +1834,7 @@ if (state->layout->is_vertical) {
 }  else {
         // Horizontal: Create visualizer if enabled, otherwise just buttons
         if (state->layout->visualizer_enabled) {
-            state->visualizer = visualizer_init();
+            state->visualizer = visualizer_init(state->layout->visualizer_bars, state->layout->visualizer_fps);
         } else {
             state->visualizer = NULL;
         }
@@ -1905,7 +1908,7 @@ if (state->layout->is_vertical) {
             // Add ghost overlay on top
             gtk_overlay_add_overlay(GTK_OVERLAY(overlay), ghost_box);
             
-            g_print("✓ Ghost button overlay created\n");
+            debug_print("✓ Ghost button overlay created\n");
             
             // Use overlay as the widget that goes into main_container
             final_control_widget = overlay;
@@ -1989,7 +1992,7 @@ if (state->layout->is_vertical) {
     }
     state->morph_easing = EASE_IN_OUT_CUBIC;  // Dynamic Island style: slow-fast-slow
     memset(&state->morph_anim, 0, sizeof(MorphAnimation));
-    g_print("✓ Dynamic Island animation system initialized (easing: OUT_SINE)\n");
+    debug_print("✓ Dynamic Island animation system initialized (easing: OUT_SINE)\n");
     
     gtk_revealer_set_transition_duration(GTK_REVEALER(window_revealer), window_duration);
     gtk_revealer_set_transition_duration(GTK_REVEALER(revealer), internal_duration);
@@ -2000,12 +2003,12 @@ if (state->layout->is_vertical) {
         GtkEventController *motion_controller = gtk_event_controller_motion_new();
         g_signal_connect(motion_controller, "motion", G_CALLBACK(on_mouse_motion), state);
         gtk_widget_add_controller(state->control_bar_container, motion_controller);
-        g_print("✓ Mouse motion detector attached to vertical control bar\n");
+        debug_print("✓ Mouse motion detector attached to vertical control bar\n");
     } else if (!state->layout->is_vertical && state->visualizer) {
         GtkEventController *motion_controller = gtk_event_controller_motion_new();
         g_signal_connect(motion_controller, "motion", G_CALLBACK(on_mouse_motion), state);
         gtk_widget_add_controller(state->control_bar_container, motion_controller);
-        g_print("✓ Mouse motion detector attached to horizontal control bar\n");
+        debug_print("✓ Mouse motion detector attached to horizontal control bar\n");
     }
 
 
@@ -2028,7 +2031,7 @@ if (state->layout->is_vertical) {
             state,
             NULL
         );
-        g_print("✓ D-Bus name watcher enabled\n");
+        debug_print("✓ D-Bus name watcher enabled\n");
     }
 
     find_active_player(state);
@@ -2047,7 +2050,7 @@ if (state->layout->is_vertical) {
     
     // Connect shutdown callback for cleanup
     g_signal_connect(app, "shutdown", G_CALLBACK(on_shutdown), state);
-    g_print("✓ Shutdown callback registered\n");
+    debug_print("✓ Shutdown callback registered\n");
 }
 
 // Cleanup callback - prevents memory leaks
@@ -2055,7 +2058,7 @@ static void on_shutdown(GtkApplication *app, gpointer user_data) {
     AppState *state = (AppState *)user_data;
     if (!state) return;
     
-    g_print("🧹 Cleaning up HyprWave...\n");
+    debug_print("🧹 Cleaning up HyprWave...\n");
     
     // Stop all timers
     if (state->update_timer > 0) {
@@ -2133,7 +2136,7 @@ static void on_shutdown(GtkApplication *app, gpointer user_data) {
         state->layout = NULL;
     }
     
-    g_print("✓ Cleanup complete\n");
+    debug_print("✓ Cleanup complete\n");
 }
 
 
@@ -2142,7 +2145,8 @@ int main(int argc, char **argv) {
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--start-hidden") == 0) {
             start_hidden = TRUE;
-            g_print("🎬 Starting hidden for smooth transition\n");
+        } else if (strcmp(argv[i], "--debug") == 0) {
+            debug_mode = TRUE;
         }
     }
     

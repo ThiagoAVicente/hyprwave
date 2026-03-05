@@ -1,4 +1,5 @@
 #include "visualizer.h"
+#include "debug.h"
 #include <math.h>
 #include <string.h>
 
@@ -12,13 +13,13 @@
 static void process_audio_samples(VisualizerState *state, const float *samples, size_t n_samples) {
     if (n_samples == 0) return;
 
-    size_t samples_per_bin = n_samples / VISUALIZER_BARS;
+    size_t samples_per_bin = n_samples / state->num_bars;
 
     // Guard: if the fragment is smaller than the bar count, samples_per_bin
     // is 0 and we'd divide by zero on the RMS line.  Scatter what we have
     // across the first bins and decay the rest.
     if (samples_per_bin == 0) {
-        for (int i = 0; i < VISUALIZER_BARS; i++) {
+        for (int i = 0; i < state->num_bars; i++) {
             if ((size_t)i < n_samples) {
                 gdouble val = (gdouble)(samples[i] * samples[i]);
                 gdouble normalized = sqrt(val) * 10.0;
@@ -33,7 +34,7 @@ static void process_audio_samples(VisualizerState *state, const float *samples, 
         return;
     }
 
-    for (int i = 0; i < VISUALIZER_BARS; i++) {
+    for (int i = 0; i < state->num_bars; i++) {
         gdouble sum = 0.0;
         size_t start = i * samples_per_bin;
         size_t end   = start + samples_per_bin;
@@ -71,16 +72,17 @@ static void pa_stream_read_callback(pa_stream *stream, size_t nbytes, void *user
 }
 
 // Render loop — updates the GTK bar widgets from bar_heights[].
-// Runs on the main thread via g_timeout at VISUALIZER_UPDATE_FPS.
-//
-// NOTE: We do NOT gate on is_showing here.  The morph animation controls
-// container opacity directly and never touches is_showing.  Bars must
-// always stay up-to-date so they are at the correct height the moment the
-// container becomes visible.
+// Runs on the main thread via g_timeout at configured FPS.
 static gboolean update_visualizer(gpointer user_data) {
     VisualizerState *state = (VisualizerState *)user_data;
 
-    for (int i = 0; i < VISUALIZER_BARS; i++) {
+    // Skip rendering when container is invisible or fully transparent
+    if (!gtk_widget_get_visible(state->container) ||
+        gtk_widget_get_opacity(state->container) < 0.01) {
+        return G_SOURCE_CONTINUE;
+    }
+
+    for (int i = 0; i < state->num_bars; i++) {
         gint min_height = 2;
         gint max_height = 24;   // fits in the 32px idle bar
 
@@ -152,7 +154,7 @@ static void pa_context_state_callback(pa_context *context, void *userdata) {
                                          PA_STREAM_ADJUST_LATENCY) < 0) {
                 g_printerr("Failed to connect PulseAudio stream\n");
             } else {
-                g_print("✓ Visualizer capturing playback audio (monitor)\n");
+                debug_print("✓ Visualizer capturing playback audio (monitor)\n");
             }
             break;
         }
@@ -166,13 +168,15 @@ static void pa_context_state_callback(pa_context *context, void *userdata) {
 }
 
 // Initialize visualizer
-VisualizerState* visualizer_init() {
+VisualizerState* visualizer_init(gint num_bars, gint fps) {
     VisualizerState *state = g_new0(VisualizerState, 1);
     state->is_showing  = FALSE;
     state->is_running  = FALSE;
     state->fade_opacity = 0.0;
+    state->num_bars = CLAMP(num_bars, 1, VISUALIZER_MAX_BARS);
+    state->fps = CLAMP(fps, 1, 144);
 
-    for (int i = 0; i < VISUALIZER_BARS; i++) {
+    for (int i = 0; i < state->num_bars; i++) {
         state->bar_heights[i]  = 0.0;
         state->bar_smoothed[i] = 0.0;
     }
@@ -189,11 +193,9 @@ VisualizerState* visualizer_init() {
     gtk_widget_set_size_request(container, 275, -1);
     gtk_widget_add_css_class(container, "visualizer-container");
 
-    g_print("✓ Visualizer container: 275px fixed width\n");
+    debug_print("✓ Visualizer container: 275px fixed width\n");
 
-    // Create VISUALIZER_BARS bars.  width=-1 + hexpand lets the HBox
-    // distribute them evenly across the container.
-    for (int i = 0; i < VISUALIZER_BARS; i++) {
+    for (int i = 0; i < state->num_bars; i++) {
         GtkWidget *bar = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
         state->bars[i] = bar;
 
@@ -207,7 +209,7 @@ VisualizerState* visualizer_init() {
         gtk_box_append(GTK_BOX(container), bar);
     }
 
-    g_print("✓ %d visualizer bars created\n", VISUALIZER_BARS);
+    debug_print("✓ %d visualizer bars created at %d fps\n", state->num_bars, state->fps);
 
     // PulseAudio: create context, stream is created inside the state callback
     state->pa_mainloop = pa_threaded_mainloop_new();
@@ -219,8 +221,8 @@ VisualizerState* visualizer_init() {
         }
     }
 
-    // Render loop runs unconditionally; container opacity is the visibility knob
-    state->render_timer = g_timeout_add(1000 / VISUALIZER_UPDATE_FPS, update_visualizer, state);
+    // Render loop; visibility check inside update_visualizer skips work when hidden
+    state->render_timer = g_timeout_add(1000 / state->fps, update_visualizer, state);
 
     return state;
 }
@@ -236,7 +238,7 @@ void visualizer_hide(VisualizerState *state) {
     }
 
     gtk_widget_set_visible(state->container, FALSE);
-    g_print("Visualizer hidden\n");
+    debug_print("Visualizer hidden\n");
 }
 
 void visualizer_show(VisualizerState *state) {
@@ -252,7 +254,7 @@ void visualizer_show(VisualizerState *state) {
     state->fade_opacity = 0.0;
     state->fade_timer   = g_timeout_add(16, fade_visualizer, state);
 
-    g_print("Visualizer fading in\n");
+    debug_print("Visualizer fading in\n");
 }
 
 void visualizer_start(VisualizerState *state) {
@@ -269,7 +271,7 @@ void visualizer_start(VisualizerState *state) {
     }
 
     state->is_running = TRUE;
-    g_print("✓ Visualizer audio capture started\n");
+    debug_print("✓ Visualizer audio capture started\n");
 }
 
 void visualizer_stop(VisualizerState *state) {
@@ -286,7 +288,7 @@ void visualizer_stop(VisualizerState *state) {
     }
 
     state->is_running = FALSE;
-    g_print("Visualizer audio capture stopped\n");
+    debug_print("Visualizer audio capture stopped\n");
 }
 
 void visualizer_cleanup(VisualizerState *state) {

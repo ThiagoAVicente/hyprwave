@@ -1,4 +1,5 @@
 #include "layout.h"
+#include "debug.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -64,6 +65,13 @@ gchar *default_config =
     "# Idle timeout in seconds before visualizer appears\n"
     "# Set to 0 to disable auto-activation (visualizer only shows on demand)\n"
     "idle_timeout = 30\n"
+    "\n"
+    "# Number of visualizer bars\n"
+    "bars = 55\n"
+    "\n"
+    "# Visualizer render FPS (lower = less CPU)\n"
+    "fps = 30\n"
+    "\n"
     "[VerticalDisplay]\n"                    // ADD THIS ENTIRE SECTION
     "# Enable/disable vertical display (vertical layout only)\n"
     "enabled = true\n"
@@ -73,7 +81,7 @@ gchar *default_config =
     "idle_timeout = 5\n";
         
         g_file_set_contents(config_file, default_config, -1, NULL);
-        g_print("Created default config at: %s\n", config_file);
+        debug_print("Created default config at: %s\n", config_file);
     }
     
     // Load config
@@ -88,8 +96,10 @@ config->toggle_visibility_bind = g_strdup("Super+Shift+M");
 config->toggle_expand_bind = g_strdup("Super+M");
 config->notifications_enabled = TRUE;
 config->now_playing_enabled = TRUE;
-config->visualizer_enabled = TRUE;          // NEW
+config->visualizer_enabled = TRUE;
 config->visualizer_idle_timeout = 30;
+config->visualizer_bars = 55;
+config->visualizer_fps = 60;
 config->vertical_display_enabled = TRUE;        // ADD THIS
 config->vertical_display_scroll_interval = 5;  // 5 second idle timeout (was 60)
 config->player_preference = NULL;               // NEW - No preference by default
@@ -184,8 +194,23 @@ gboolean now_playing = g_key_file_get_boolean(keyfile, "Notifications", "now_pla
         } else {
             g_error_free(error);
         }
-    
-    
+
+        error = NULL;
+        gint viz_bars = g_key_file_get_integer(keyfile, "Visualizer", "bars", &error);
+        if (!error && viz_bars > 0) {
+            config->visualizer_bars = viz_bars;
+        } else {
+            g_clear_error(&error);
+        }
+
+        error = NULL;
+        gint viz_fps = g_key_file_get_integer(keyfile, "Visualizer", "fps", &error);
+        if (!error && viz_fps > 0) {
+            config->visualizer_fps = CLAMP(viz_fps, 1, 144);
+        } else {
+            g_clear_error(&error);
+        }
+
         gboolean vert_enabled = g_key_file_get_boolean(keyfile, "VerticalDisplay", "enabled", &error);
         if (!error) {
             config->vertical_display_enabled = vert_enabled;
@@ -235,12 +260,12 @@ gboolean now_playing = g_key_file_get_boolean(keyfile, "Notifications", "now_pla
                     }
                 }
                 
-                g_print("Player preference: ");
+                debug_print("Player preference: ");
                 for (gint i = 0; i < config->player_preference_count; i++) {
-                    g_print("%s%s", config->player_preference[i], 
+                    debug_print("%s%s", config->player_preference[i], 
                            i < config->player_preference_count - 1 ? ", " : "");
                 }
-                g_print("\n");
+                debug_print("\n");
             }
             
             g_strfreev(raw_list);
@@ -255,7 +280,7 @@ gboolean now_playing = g_key_file_get_boolean(keyfile, "Notifications", "now_pla
     g_free(config_file);
     g_free(config_dir);
     
-    g_print("Layout: %s edge (%s)\n",
+    debug_print("Layout: %s edge (%s)\n",
             config->edge == EDGE_RIGHT ? "right" :
             config->edge == EDGE_LEFT ? "left" :
             config->edge == EDGE_TOP ? "top" : "bottom",
