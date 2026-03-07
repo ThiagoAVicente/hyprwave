@@ -460,7 +460,44 @@ static void handle_sigusr2(int sig) {
     on_expand_clicked(NULL, global_state);
 }
 
+// Forward declarations for signal handler callbacks
+static void on_play_clicked(GtkButton *button, gpointer user_data);
+static void on_next_clicked(GtkButton *button, gpointer user_data);
+static void on_prev_clicked(GtkButton *button, gpointer user_data);
 
+// Idle callbacks for real-time signal handlers (safe to call GTK/D-Bus from main loop)
+static gboolean idle_play_toggle(gpointer user_data) {
+    AppState *state = (AppState *)user_data;
+    on_play_clicked(NULL, state);
+    return G_SOURCE_REMOVE;
+}
+
+static gboolean idle_next_track(gpointer user_data) {
+    AppState *state = (AppState *)user_data;
+    on_next_clicked(NULL, state);
+    return G_SOURCE_REMOVE;
+}
+
+static gboolean idle_prev_track(gpointer user_data) {
+    AppState *state = (AppState *)user_data;
+    on_prev_clicked(NULL, state);
+    return G_SOURCE_REMOVE;
+}
+
+static void handle_sigrtmin(int sig) {
+    if (!global_state) return;
+    g_idle_add(idle_play_toggle, global_state);
+}
+
+static void handle_sigrtmin1(int sig) {
+    if (!global_state) return;
+    g_idle_add(idle_next_track, global_state);
+}
+
+static void handle_sigrtmin2(int sig) {
+    if (!global_state) return;
+    g_idle_add(idle_prev_track, global_state);
+}
 
 
 
@@ -2012,6 +2049,9 @@ if (state->layout->is_vertical) {
     global_state = state;
     signal(SIGUSR1, handle_sigusr1);
     signal(SIGUSR2, handle_sigusr2);
+    signal(SIGRTMIN, handle_sigrtmin);
+    signal(SIGRTMIN+1, handle_sigrtmin1);
+    signal(SIGRTMIN+2, handle_sigrtmin2);
 
     // Setup D-Bus name watcher to monitor player appearance/disappearance
     GDBusConnection *bus = g_bus_get_sync(G_BUS_TYPE_SESSION, NULL, NULL);
